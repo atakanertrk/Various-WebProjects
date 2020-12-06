@@ -1,0 +1,164 @@
+﻿@model RestoranOtomasyonuWebApp.Models.MenuDuzenleModel;
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+@{
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+    List<UrunModel> urunler = dataAccess.GurupIcindekiUrunlerinIdListesi(Model.gurupId);
+    string gurupAdi = dataAccess.GetGurupNameByGurupId(Model.gurupId);
+
+    <div style="margin-top:20px;"></div>
+
+    <form asp-controller="Yonetici" asp-action="MenuDuzenle" >
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Guruplara Dön" class="btn btn-outline-info" />
+            </div>
+        </div>
+    </form>
+
+    <h2> <span style="color:darkgreen">@gurupAdi</span>  Gurubunu Düzenliyorsunuz</h2>
+
+    <div style="margin-left:7%; border:2px solid darkblue; padding:20px; margin-bottom:60px;">
+        <h4 style="color:darkblue">Guruba Ürün Ekle</h4>
+        <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="GurubaUrunEkle">
+            <div class="form-group">
+                <div class="col-md-10" style="margin-bottom:7px;">
+                    <p><span style="font-weight:bold">1-)</span> Ürüne Ait Fotoğrafı Seçin</p>
+                    <input type="file" name="files" multiple />
+                </div>
+                <div class="col-md-10" style="margin-bottom:3px">
+                    <span style="font-weight:bold">2-)</span> Ürün Başlığı: <input asp-for="urun.urunAdi" placeholder="Adana Dürüm" autocomplete="off" />
+                </div>
+                <div class="col-md-10" style="margin-bottom:3px">
+                    <span style="font-weight:bold">3-)</span> Açıklaması: <input asp-for="urun.urunAciklamasi" placeholder="150 gram az acılı" autocomplete="off" />
+                </div>
+                <div class="col-md-10" style="margin-bottom:3px">
+                    <span style="font-weight:bold">4-)</span> Ürün Fiyatı:<input asp-for="urun.urunFiyati" type="number" min="0" max="3000" value="0" step=".25" autocomplete="off" />
+                </div>
+                <div class="col-md-10">
+                    <input asp-for="urun.gurupId" value="@Model.gurupId" hidden />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Ürünü Ekle" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    foreach (var urun in Model.urunlerlist)
+    {
+        string imagename = urun.Id.ToString() + ".jpg";
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <h3 style="word-break: break-all">@urun.urunAdi</h3>
+                    @{ 
+                        if (urun.stokVarYok != "var")
+                        {
+                            <h3 style="color:red; font-weight:bold">Stokta Yok</h3>
+                        }
+                    }
+                    <p style="word-break: break-all">@urun.urunAciklamasi</p>
+                    <p style="font-weight:bolder">@urun.urunFiyati ₺</p>
+                    <img src="~/images/urunfoto/@imagename" alt="@urun.urunAdi" class="img-fluid" style="max-width:60%!important" />
+                </div>
+                <div class="col-sm">
+                    <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="UrunFotosunuDegistir"  asp-route-urunId="@urun.Id" asp-route-gurupId="@Model.gurupId">
+                        <p style="font-weight:bold">(@urun.urunAdi Fotoğrafını değiştirmek için Fotoğraf seçin ardından değiştire tıklayın)</p>
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="file" name="files" multiple />
+                            </div>
+                            <div class="form-group" style="margin-top:20px">
+                                <div class="col-md-10">
+                                    <input type="submit" value="Değiştir" class="btn btn-outline-secondary" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="margin-top:3px; margin-bottom:3px">
+                        <hr />
+                    </div>
+
+
+                    <form method="post" asp-controller="Yonetici" asp-action="UrunBilgileriGuncelle" style="border:2px solid green; margin:10px; padding:10px">
+                        <div class="form-group">
+                            <div class="col-md-10" style="margin-top:4px;">
+                                Ürün Adı :<input asp-for="guncelUrun.urunAdi" value="@urun.urunAdi" placeholder="örn: tavuk dürüm" autocomplete="off" required />
+                            </div>
+                            <div class="col-md-10" style="margin-top:4px;">
+                                Açıklama :<input asp-for="guncelUrun.urunAciklamasi" value="@urun.urunAciklamasi" placeholder="örn: 200gram soslu tavuk" autocomplete="off" required/>
+                            </div>
+                            <div class="col-md-10" style="margin-top:4px;">
+                                Fiyat :<input asp-for="guncelUrun.urunFiyati" value="@urun.urunFiyati" type="number" min="0" max="3000" step=".25" autocomplete="off" required />
+                            </div>
+                            <div class="col-md-10">
+                                <input asp-for="guncelUrun.Id" value="@urun.Id" required hidden />
+                            </div>
+                            <div class="col-md-10">
+                                <input asp-for="gurupId" value="@Model.gurupId" required hidden />
+                            </div>
+                            <div class="col-md-10" style="margin-top:4px;">
+                                <input type="submit" value="Ürün Bilgilerini Üstte Girili Bilgiler İle Güncelle" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </form>
+                    <div style="margin-top:3px; margin-bottom:3px">
+                        <hr />
+                    </div>
+                    @if (urun.stokVarYok != "var")
+                    {
+                        <form method="post" asp-controller="Yonetici" asp-action="StokDurumuDegistir" asp-route-urunId="@urun.Id" asp-route-gurupId="@Model.gurupId" asp-route-stokDurumu="@urun.stokVarYok" style="margin-top:6px;">
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" value="Stokta Var Olarak Değiştir" class="btn btn-warning" />
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-controller="Yonetici" asp-action="StokDurumuDegistir"  asp-route-urunId="@urun.Id" asp-route-gurupId="@Model.gurupId" asp-route-stokDurumu="@urun.stokVarYok" style="margin-top:6px;">
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" value="Stokta Yok Olarak Değiştir" class="btn btn-warning" />
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="UrunuSil"  asp-route-urunId="@urun.Id" asp-route-gurupId="@Model.gurupId" style="margin-top:6px;">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <input type="submit" value="Ürünü Sil" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div style="margin-top:60px; margin-bottom:60px">
+            <hr />
+        </div>
+
+    }
+}
+
+

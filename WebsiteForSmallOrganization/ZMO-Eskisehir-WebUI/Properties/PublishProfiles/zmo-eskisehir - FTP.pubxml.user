@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAei2YVKktsUmqHtaLxLoA1QAAAAACAAAAAAAQZgAAAAEAACAAAAB9f5ozk7pTeSf0/RUEd2bzzmgAlEJD0G31V+eQn6CfoQAAAAAOgAAAAAIAACAAAACglBQrLZUypUJ2Icnosx4bdEkeK5X+7zMuU8GscnIDloAAAADU0OX/o9AzgtjcdLgVh1M5TafrBFy2tUat1vUGah9oMuhC6B0fMhXICVWCR2SgoU8IR6wolqWuxVeXu9vas9+7C9nVHAFrgh4RYPVYMCMVQsrTR2A12Dsm6InBOKfFAc9TKl9PtBMbKCkpvtosAIcCV3S9uGLWtyUZ9zWLg68Vq0AAAABIoGfjGuUsQAOSNgrPdV20nGYw4Y/mJ9Pr2uXch5F7tVXni91N9Hzh0Scd1uXpHmJeOPBQrxqcG6WissIpgX7s</EncryptedPassword>
+    <_PublishTargetUrl>ftp://waws-prod-dm1-035.ftp.azurewebsites.windows.net/site/wwwroot</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>09/10/2020 16:13:04</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>09/10/2020 16:13:04</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>09/11/2020 13:31:28</publishTime>
+    </File>
+    <File Include="wwwroot/css/site.css">
+      <publishTime>09/11/2020 01:55:24</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.ico">
+      <publishTime>09/11/2020 02:37:17</publishTime>
+    </File>
+    <File Include="wwwroot/js/site.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css">
+      <publishTime>09/10/2020 23:20:07</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/LICENSE">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.min.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.min.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/LICENSE.md">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.js">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.map">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/LICENSE.txt">
+      <publishTime>09/10/2020 16:13:05</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/grass.jpg">
+      <publishTime>09/11/2020 01:51:25</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/1.jpg">
+      <publishTime>09/10/2020 16:39:46</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/2.jpg">
+      <publishTime>09/10/2020 16:39:41</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/Black.png">
+      <publishTime>09/11/2020 00:05:37</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/greeb.jpg">
+      <publishTime>09/11/2020 00:19:40</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/Haberler/1.jpg">
+      <publishTime>09/10/2020 16:39:46</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/Haberler/2.jpg">
+      <publishTime>09/10/2020 16:39:41</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/person.png">
+      <publishTime>09/10/2020 19:15:27</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/SubeTarihcesi/person.png">
+      <publishTime>09/10/2020 19:15:27</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/YonetimKuruluUyeleri/person.png">
+      <publishTime>09/10/2020 19:15:27</publishTime>
+    </File>
+    <File Include="wwwroot/Resources/Images/zmo-eskisehir.jpg">
+      <publishTime>09/10/2020 23:26:36</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.deps.json">
+      <publishTime>09/11/2020 13:31:18</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.dll">
+      <publishTime>09/11/2020 13:31:15</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.exe">
+      <publishTime>09/11/2020 13:31:16</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.pdb">
+      <publishTime>09/11/2020 13:31:15</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.runtimeconfig.json">
+      <publishTime>09/10/2020 17:54:05</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.Views.dll">
+      <publishTime>09/11/2020 13:31:18</publishTime>
+    </File>
+    <File Include="ZMO-Eskisehir-WebUI.Views.pdb">
+      <publishTime>09/11/2020 13:31:18</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

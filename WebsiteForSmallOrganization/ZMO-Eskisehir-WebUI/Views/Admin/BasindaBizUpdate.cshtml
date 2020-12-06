@@ -1,0 +1,39 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+
+<form asp-controller="Admin" asp-action="Index">
+    <div class="form-group">
+        <input type="text" asp-for="password" value="@Model.password" class="form-control" readonly hidden autocomplete="off" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="panel ana sayfasına dön" class="btn btn-secondary" />
+    </div>
+</form>
+<hr />
+<h3>Basında Biz Kayıt Bilgilerini Düzenle (fotoğrafı değiştirmek için kayıt silinip tüm bilgiler tekrar girilmelidir)</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="BasindaBizUpdatePost" method="post">
+            <div class="form-group">
+                <label>Basında Biz Başlığı</label>
+                <input asp-for="BasindaBizModel.Baslik" class="form-control" value="@Model.BasindaBizModel.Baslik" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Yeni Tarih Girin (eski tarih: @Model.BasindaBizModel.Tarih)</label>
+                <input asp-for="BasindaBizModel.Tarih" class="form-control" value="@DateTime.UtcNow.AddHours(3)" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>ilgili bir link girin. Link koymak istemiyor iseniz nokta koyun</label>
+                <input asp-for="BasindaBizModel.Link" class="form-control" type="text" value="@Model.BasindaBizModel.Link" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="password" class="form-control" readonly hidden autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="BasindaBizModel.Id" value="@Model.BasindaBizModel.Id" class="form-control" readonly hidden autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Basında Biz Kaydını Yukarıdaki Bilgiler İle Güncelle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,159 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/*  My Custom Css  */
+
+.slider-image {
+    /*border-radius: 3%;*/
+    width: 100%;
+    height: auto;
+}
+
+/*.slider-image-duyuru {
+    border-radius: 3%;
+    width: 100%;
+    height: 200px;
+}*/
+
+.about-us-short {
+    text-align: center;
+    margin-top: 5%;
+}
+
+    .about-us-short h4 {
+        color: darkgreen;
+    }
+
+.egitimbg {
+    background: rgb(68,121,9);
+    background: linear-gradient(90deg, rgba(68,121,9,0.7259278711484594) 0%, rgba(0,212,255,0.7371323529411764) 100%);
+    text-align: center;
+    border-radius: 100%;
+}
+
+    .egitimbg h4 {
+        padding-top: 20%;
+        padding-bottom: 20%;
+    }
+
+
+/* TEXT ANİMATİON */
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animation {
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+
+
+/* GOTOP */
+.GoTop {
+    color: white;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 100%;
+    padding-top:15px;
+    font-size: 20px;
+    font-weight: bolder;
+    border: 2px solid blue;
+    text-align:center;
+    z-index:4;
+}
+.GoTop a {
+        color:blue;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+    .break {
+        display: block;
+    }
+}
+

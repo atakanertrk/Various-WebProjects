@@ -1,0 +1,37 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "UrunGurubunaUrunEkle";
+}
+
+
+<h2> @Model.UrunGurubununAdi Gurubuna Ürün Ekleme  </h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="UrunGurubunaUrunEkle">
+            <div class="form-group">
+                <label>Ürün Adı</label>
+                <input asp-for="urunModel.ProductName" class="form-control" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Ürün Miktarı</label>
+                <input asp-for="urunModel.Amount" class="form-control" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Ürün Fiyatı (TL) Kuruş Değerini Nokta ile Ayır</label>
+                <input asp-for="urunModel.Price" class="form-control" type="text" pattern="[1000000-0.0-99]{0,10}"  placeholder="örnek 21.50" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Ürün ile ilgili Özellikler (maximum 200 karakter)</label>
+                <input asp-for="urunModel.Properties" class="form-control" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>ürünün bulunduğu gurup numarası</label>
+                <input asp-for="urunModel.GroupId" value="@Model.UrunGurubununId" class="form-control" readonly required />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ürünü Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

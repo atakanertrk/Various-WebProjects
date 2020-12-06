@@ -1,0 +1,30 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.BasindaBizModel;
+
+    <button type="button" class="btn btn-success"><a asp-controller="Home" asp-action="Index" style="color:whitesmoke; font-weight:bold; text-decoration:none">Ana Sayfa</a></button>
+    <hr />
+
+    <h4 style="font-weight:bold; margin-bottom:25px;">Basinda Biz Tüm Kayıtlar</h4>
+
+    <ul style="list-style:none">
+        @{
+            int counter = 1;
+            foreach (var basindaBiz in Model.basindaBizKayitlar)
+            {
+                if (counter >= 100)
+                {
+                    break;
+                }
+                <li style="margin-bottom:15px">
+                    <p style="font-weight:bold"> @basindaBiz.Tarih.ToShortDateString()</p>
+                    <h4 style="color:darkred" class="text-break"> @basindaBiz.Baslik </h4>
+                    @{ string imageName = basindaBiz.Id.ToString() + ".jpg";}
+                    <img src="~/Resources/Images/BasindaBiz/@imageName" alt="basında biz fotografı" style="max-width:50%" />
+                    <p class="text-break"><a href="@basindaBiz.Link">@basindaBiz.Link</a></p>
+                    <hr />
+                </li>
+                counter += 1;
+            }
+        }
+
+    </ul>
+

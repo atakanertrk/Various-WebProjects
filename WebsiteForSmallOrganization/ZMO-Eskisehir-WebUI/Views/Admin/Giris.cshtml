@@ -1,0 +1,16 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="https://st2.depositphotos.com/4264683/6405/v/450/depositphotos_64059685-stock-illustration-security-shield-with-lock.jpg" alt="security logo" width="200px" height="200px" />
+        <form asp-controller="Admin" asp-action="Giris">
+            <div class="form-group">
+                <label>Şifre:</label>
+                <input asp-for="password" class="form-control" required style="background-color:dimgrey; color:wheat" autocomplete="on" type="password" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Giriş" class="btn btn-outline-dark" />
+            </div>
+        </form>
+    </div>
+</div>

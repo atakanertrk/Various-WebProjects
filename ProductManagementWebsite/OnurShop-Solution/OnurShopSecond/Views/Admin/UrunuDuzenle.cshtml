@@ -1,0 +1,77 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "UrunuDuzenle";
+}
+
+<h2>Ürün Adı: <span style="color:green">@Model.urunModel.ProductName</span> </h2>
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>Ürün Numarası</th>
+            <th>Ürün Özellikleri</th>
+            <th>Ürün Miktarı</th>
+            <th>Ürün Ücreti (TL)</th>
+            <th>Bulunduğu Gurup</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.urunModel.ProductId</td>
+            <td>@Model.urunModel.Properties</td>
+            <td>@Model.urunModel.Amount</td>
+            <td>@Model.urunModel.Price</td>
+            <td>@Model.UrunGurubununAdi</td>
+            <td>
+                <img src="~/images/tek.png" alt="ürün" width="100" height="100" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2> @Model.UrunGurubununAdi Gurubundaki @Model.urunModel.ProductName Adlı Ürünü Güncellemek için:</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="UrunuDuzenle">
+            <div class="form-group">
+                <label>Ürün Numarası</label>
+                <input asp-for="GuncelUrunDegerleri.ProductId" value="@Model.urunModel.ProductId" class="form-control" required readonly />
+            </div>
+            <div class="form-group">
+                <label>Ürünün Adı</label>
+                <input asp-for="GuncelUrunDegerleri.ProductName" value="@Model.urunModel.ProductName" class="form-control" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Ürün Miktarı</label>
+                <input asp-for="GuncelUrunDegerleri.Amount" value="@Model.urunModel.Amount" class="form-control" required autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label>Ürün Fiyatı (TL) Kuruş Değerini Nokta ile Ayır</label>
+                <input asp-for="GuncelUrunDegerleri.Price" value="@Model.urunModel.Price" type="text"  class="form-control" pattern="[1000000-0.0-99]{0,10}" required autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label>Ürün Özellikleri</label>
+                <input asp-for="GuncelUrunDegerleri.Properties" value="@Model.urunModel.Properties" class="form-control" required autocomplete="off" />
+            </div>
+
+            <div class="form-group">
+                <label>Ürünün Gurubunu Değiştir (şu anki gurubu:<span style="font-weight:bold; color:darkblue">@Model.UrunGurubununAdi)</span></label>
+                <select asp-for="GuncelUrunDegerleri.GroupId"
+                        class="form-control"
+                        required
+                        asp-items="@(new SelectList(Model.urunGurubuListesi,"GroupId", "GroupName"))">
+                        <option disabled selected></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Değiştir" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+

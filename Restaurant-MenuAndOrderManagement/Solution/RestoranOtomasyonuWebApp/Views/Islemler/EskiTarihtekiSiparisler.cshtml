@@ -1,0 +1,80 @@
+﻿@model RestoranOtomasyonuWebApp.Models.SiparisIslemiSifreModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+
+    <form asp-controller="Islemler" asp-action="Index" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+
+    //model.date
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+
+    var siparisler = dataAccess.GetTamamlanmisSiparislerByDate(Model.date);
+
+    if (siparisler.Count > 0)
+    {
+        List<UrunVeAdetModel> urunAdetListesi = new List<UrunVeAdetModel>();
+        DateTime now = Model.date;
+        List<string> urunler = dataAccess.TamamlanmisUrunAdlariByDate(now);
+        foreach (string urunAdi in urunler)
+        {
+            UrunVeAdetModel data = new UrunVeAdetModel();
+            decimal toplamAdet = dataAccess.TamamlanmisUrununMiktariByDate(now, urunAdi);
+            data.urunAdi = urunAdi; data.adet = toplamAdet;
+            urunAdetListesi.Add(data);
+        }
+        urunAdetListesi = urunAdetListesi.OrderByDescending(x => x.adet).ToList();
+        foreach (var urun in urunAdetListesi)
+        {
+        <p>ürün: <strong>@urun.urunAdi</strong> - <strong>@urun.adet</strong> adet/porsiyon</p>
+        }
+
+    <p>
+        <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#gecmisSiparisler" aria-expanded="false" aria-controls="collapseExample">
+            @Model.date.ToString("dd/MM/yyyy") Tarihindeki Siparişleri Görüntüle
+        </button>
+    </p>
+
+        decimal tarihtekiToplam = 0;
+
+        foreach (var siparis in siparisler)
+        {
+    <div class="collapse" id="gecmisSiparisler">
+        <div class="card card-body">
+            <p><span style="font-weight:bold">Tarih:</span> @siparis.tarih.ToString("dd/MM/yyyy HH:mm") - <span style="font-weight:bold">MasaNo:</span> @siparis.masaNo </p>
+            <p><span style="font-weight:bold">Ürün:</span> @siparis.urunAdi - <span style="font-weight:bold">Ürün Fiyatı:</span>@siparis.urunFiyati - <span style="font-weight:bold">Adet/Porsiyon:</span> @siparis.adet</p>
+            @{ decimal total = siparis.adet * siparis.urunFiyati; }
+            <p style="font-weight:bold">Sipariş Toplamı : <span style="color:darkblue">@total</span></p>
+            @{ tarihtekiToplam += total; }
+        </div>
+    </div>
+        }
+
+    <h5 style="margin-top:20px; color:darkred;">@Model.date.ToString("dd/MM/yyyy") Tarihindeki Toplam Ödemesi Alınan Tutar Geçmişi : @tarihtekiToplam TL</h5>
+    }
+    else
+    {
+    <h4> @Model.date.ToString("dd/MM/yyyy") Tarihine Ait Sipariş Kaydı Bulunmuyor</h4>
+    }
+
+
+    <div class="onhoverchangeopacity" style="position:fixed; right:30px; bottom:30px; z-index:3">
+        <a href="#" style="text-decoration:none; color:black"> <i style="font-size:30px;" class="fa">&#xf062;</i> </a>
+    </div>
+
+}
+

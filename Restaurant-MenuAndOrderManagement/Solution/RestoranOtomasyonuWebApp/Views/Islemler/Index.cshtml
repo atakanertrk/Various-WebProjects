@@ -1,0 +1,131 @@
+﻿@model RestoranOtomasyonuWebApp.Models.SiparisIslemiSifreModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+
+
+    <form asp-controller="Home" asp-action="Admin" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Admin Ana Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+    <form asp-controller="Islemler" asp-action="IslemlerCikisYap" style="margin-top:30px">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-danger" value="Çıkış Yap" />
+            </div>
+        </div>
+    </form>
+
+    <h3>Sipariş Oluşturma, Ödeme Alma, Sipariş Geçmişi İşlemlerinizi Buradan Yönetebilirsiniz</h3>
+
+    <hr />
+
+    <ul>
+        <li><a asp-controller="Islemler" asp-action="Masalar" style="margin-bottom:20px; color:red; font-weight:bold; font-size:16px;">Masa İçin Sipariş Oluştur veya Ödeme Al</a></li>
+    </ul>
+
+
+    <hr />
+
+
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+
+
+    <div style="margin-top:80px;"></div>
+
+
+
+
+
+    decimal gunlukToplam = 0;
+
+    <p>
+        <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#gecmis" aria-expanded="false" aria-controls="collapseExample">
+            Tamamlanmış / Geçmiş Siparişler
+        </button>
+    </p>
+    <div class="collapse" id="gecmis">
+        <div class="card card-body">
+            <hr/>
+            <div>
+                <p style="font-weight:bold">Ürün Adı - Adet/Porsiyon</p>
+                @{ 
+                    List<UrunVeAdetModel> urunAdetListesi = new List<UrunVeAdetModel>();
+                    DateTime now = DateTime.UtcNow.AddHours(3);
+                    List<string> urunler = dataAccess.TamamlanmisUrunAdlariByDate(now);
+                    foreach (string urunAdi in urunler)
+                    {
+                        UrunVeAdetModel data = new UrunVeAdetModel();
+                        decimal toplamAdet = dataAccess.TamamlanmisUrununMiktariByDate(now, urunAdi);
+                        data.urunAdi = urunAdi; data.adet = toplamAdet;
+                        urunAdetListesi.Add(data);
+                    }
+                    urunAdetListesi=urunAdetListesi.OrderByDescending(x=>x.adet).ToList();
+                    foreach (var urun in urunAdetListesi)
+                    {
+                        <p>ürün: <strong>@urun.urunAdi</strong> - <strong>@urun.adet</strong> adet/porsiyon</p>
+                    }
+
+                }
+            </div>
+            <hr/>
+            <p>
+                <button class="btn btn-outline-success" type="button" data-toggle="collapse" data-target="#gecmisSiparisler" aria-expanded="false" aria-controls="collapseExample">
+                    Bugünün Tamamlanmış Siparişleri
+                </button>
+            </p>
+            @{ List<TamamlanmisSiparisModel> eskiSiparisler = dataAccess.GetTamamlanmisSiparislerByDate(DateTime.UtcNow.AddHours(3)); }
+
+            @foreach (TamamlanmisSiparisModel siparis in eskiSiparisler)
+            {
+                <div class="collapse" id="gecmisSiparisler">
+                    <div class="card card-body">
+                        <p><span style="font-weight:bold">Tarih:</span> @siparis.tarih.ToString("dd-MM-yyyy HH:mm") - <span style="font-weight:bold">MasaNo:</span> @siparis.masaNo </p>
+                        <p><span style="font-weight:bold">Ürün:</span> @siparis.urunAdi - <span style="font-weight:bold">Ürün Fiyatı:</span>@siparis.urunFiyati - <span style="font-weight:bold">Adet/Porsiyon:</span> @siparis.adet</p>
+                        @{ decimal total = siparis.adet * siparis.urunFiyati; }
+                        <p style="font-weight:bold">Sipariş Toplamı : <span style="color:darkblue">@total</span></p>
+                        @{ gunlukToplam += total; }
+                    </div>
+                </div>
+            }
+
+            <h4>Bu Günlük Toplam Kazanç : @gunlukToplam TL</h4>
+
+            <hr />
+
+            <h4 style="margin-top:30px; margin-bottom:10px;">Başka Bir Tarihteki Sipariş Geçmişi İçin :</h4>
+
+            <form asp-controller="Islemler" asp-action="EskiTarihtekiSiparisler" style="margin-top:40px; margin-bottom:50px">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <input asp-for="date" type="date" value="@DateTime.UtcNow.AddHours(3)" />
+                        <input type="submit" class="btn btn-outline-dark" value="Seçilen Tarihteki Siparişleri Göster" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <div class="onhoverchangeopacity" style="position:fixed; right:30px; bottom:30px; z-index:3">
+        <a href="#" style="text-decoration:none; color:black"> <i style="font-size:30px;" class="fa">&#xf062;</i> </a>
+    </div>
+
+
+
+
+
+}

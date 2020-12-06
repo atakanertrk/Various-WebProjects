@@ -1,0 +1,115 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "UrunGurubu";
+}
+
+@{
+
+    if (Model.urunListesi != null && Model.urunListesi.Count != 0)
+    {
+
+        <h5>
+            <a href="@Url.Action("UrunGuruplari", "Admin")">önceki sayfa</a>
+        </h5>
+
+
+        <h3 style="color:darkred">Ürün Gurubunu Silmek İçeriğindeki Ürünleri De Siler !!</h3>
+        <div class="btn btn-danger">
+            <a href="@Url.Action("UrunGurubunuSil", "Admin",new { selectedGroupId = Model.urunListesi.First().GroupId })" style="font-weight:bold; color:white">
+                Ürün Gurubunu Sil
+            </a>
+        </div>
+
+        <h3 style="color:darkgreen">Guruba Ürün Ekle</h3>
+        <div class="btn btn-success">
+            <a href="@Url.Action("UrunGurubunaUrunEkle", "Admin",new { selectedGroupId = Model.UrunGurubununId })" style="font-weight:bold; color:black">
+                Ürün Ekle
+            </a>
+        </div>
+
+        <h3 style="color:blue">Gurubun Adını Değiştir</h3>
+        <div class="btn btn-info">
+            <a href="@Url.Action("UrunGurubununAdiniDegistir", "Admin",new { selectedGroupId = Model.UrunGurubununId })" style="font-weight:bold; color:black">
+                Gurubun Adını Değiştir
+            </a>
+        </div>
+
+        <table class="table table-hover table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <h2 style="color:darkgreen; text-align:center; font-weight:bold">@Model.UrunGurubununAdi Gurubu</h2>
+                </tr>
+                <tr>
+                    <h3 style="text-align:center; font-weight:bolder"> --Ürünler-- </h3>
+                </tr>
+                <tr>
+                    <th>Ürün Numarası</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Miktarı</th>
+                    <th>Ürün Ücreti (TL)</th>
+                    <th>Ürün Özellikleri</th>
+                    <th>GurupNumarası</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.urunListesi)
+                {
+                <tr>
+                    <td>@item.ProductId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Price</td>
+                    <td>@item.Properties</td>
+                    <td>@item.GroupId</td>
+                    <td>
+                        <img src="~/images/tek.png" alt="ürün" width="100" height="100" />
+                    </td>
+                    <td>
+                        <div class="btn btn-success">
+                            <a href="@Url.Action("UrunuDuzenle", "Admin",new { selectedProductId = item.ProductId })" style="font-weight:bold; color:black">
+                                Ürünü Düzenle
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="btn btn-danger">
+                            <a href="@Url.Action("UrunGurubundakiUrunuSil", "Admin",new { selectedProductId = item.ProductId })" style="font-weight:bold; color:white">
+                                Ürünü Sil
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h5>
+            <a href="@Url.Action("UrunGuruplari", "Admin")">önceki sayfa</a>
+        </h5>
+
+        <h3 style="color:darkred">Ürün Gurubunu Silmek İçeriğindeki Ürünleri De Siler !!</h3>
+        <div class="btn btn-danger">
+            <a href="@Url.Action("UrunGurubunuSil", "Admin",new { selectedGroupId = Model.UrunGurubununId })" style="font-weight:bold; color:white">
+                Ürün Gurubunu Sil
+            </a>
+        </div>
+        <hr />
+        <h2> @Model.UrunGurubununAdi Gurubunda Ürün Bulunmuyor </h2>
+        <h3 style="color:darkgreen">Guruba Ürün Ekle</h3>
+        <div class="btn btn-success">
+            <a href="@Url.Action("UrunGurubunaUrunEkle", "Admin",new { selectedGroupId = Model.UrunGurubununId })" style="font-weight:bold; color:black">
+                Ürün Ekle
+            </a>
+        </div>
+
+        <h3 style="color:blue">Gurubun Adını Değiştir</h3>
+        <div class="btn btn-info">
+            <a href="@Url.Action("UrunGurubununAdiniDegistir", "Admin",new { selectedGroupId = Model.UrunGurubununId })" style="font-weight:bold; color:black">
+                Gurubun Adını Değiştir
+            </a>
+        </div>
+    }
+
+}

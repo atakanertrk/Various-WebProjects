@@ -1,0 +1,26 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+
+
+<h4>Basında Biz Kayıdı İçin Bir Fotoğraf Seçin</h4>
+
+<hr />
+
+<form method="post" enctype="multipart/form-data" asp-controller="Admin" asp-action="BasindaBizFotoEklePost">
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Basında Biz Kayıdı İçin Fotoğraf Ekle (SADECE TEK BİR FOTOĞRAF SEÇİNİZ)</p>
+            <input type="file" name="files" multiple />
+        </div>
+        <div class="col-md-10">
+            <input type="text" asp-for="id" readonly hidden />
+        </div>
+        <div class="col-md-10">
+            <input type="text" asp-for="password" value="@Model.password" readonly hidden />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Yükle" />
+        </div>
+    </div>
+</form>

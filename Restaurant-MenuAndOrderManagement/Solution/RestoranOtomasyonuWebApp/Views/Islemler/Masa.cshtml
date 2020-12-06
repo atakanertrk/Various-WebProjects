@@ -1,0 +1,100 @@
+﻿@model RestoranOtomasyonuWebApp.Models.SiparisModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+
+    <form asp-controller="Islemler" asp-action="Masalar"  style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Tüm Masalar" />
+            </div>
+        </div>
+    </form>
+
+
+
+
+    <hr />
+    <p style="font-weight:bold; word-break:break-all "><span style="color:darkblue">MASA NOTU :</span> @Model.MasaNotu </p>
+    <form asp-controller="Islemler" asp-action="MasaNotuEkle" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input asp-for="masaNo" value="@Model.masaNo" required hidden />
+                <textarea asp-for="MasaNotu" placeholder="eklemek istediğiniz notu yazın..." style="width:40%; min-height:60px;">@Model.MasaNotu</textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-success" value="Not Ekle / Değiştir" />
+            </div>
+        </div>
+    </form>
+
+
+    <hr />
+
+    decimal total = 0;
+    <h3>@Model.masaNo numaralı masaya ait siparişler aşağıdadır</h3>
+
+    <hr />
+
+    foreach (var siparis in Model.siparisEdilenUrunList)
+    {
+        decimal siparisFiyat = siparis.urunFiyati * siparis.adet;
+    <div style="margin-top:20px; margin-bottom:20px; border:1px solid black; padding:10px;">
+        <p>ürün: <span style="font-weight:bold; font-size:20px;">@siparis.urunAdi (@siparis.urunFiyati TL)</span></p>
+        <p>adet-porsiyon: <span style="font-weight:bold; font-size:20px"> @siparis.adet</span></p>
+        <p>toplam: <span style="font-weight:bold">@siparisFiyat.ToString("0.00") TL</span></p>
+        @{total += siparis.adet * siparis.urunFiyati; }
+        <p>Sipariş Notu: <span style="color:darkgreen; font-weight:bold;">@siparis.siparisNotu</span></p>
+        @if (siparis.teslimEdildiMi == "hayir")
+            {
+        <p style="color:darkorange; font-weight:bold">Bu Sipariş Teslim Edilmemiş<span style="color:darkorange; font-weight:800">!</span></p>
+        <form asp-controller="Islemler" asp-action="SiparisTeslimEdildi" asp-route-siparisId="@siparis.siparisId" asp-route-masaNo="@Model.masaNo" style="margin-top:10px;">
+            <div class="form-group">
+                <div class="col-md-10" style="font-weight:bold;">
+                    <input type="submit" class="btn btn-warning" value="Teslim Edildi Olarak İşaretle" />
+                </div>
+            </div>
+        </form>
+ <!-- <a asp-controller="Islemler" asp-action="SiparisTeslimEdildi" asp-route-siparisId="@siparis.siparisId"  asp-route-masaNo="@Model.masaNo" style="font-weight:bold; color:darkblue; border-bottom:2px solid darkorange;">Teslim Edildi Olarak İşaretle</a> -->
+            }
+            else
+            {
+        <p style="color:darkgreen; font-weight:bold">teslim edilmiş</p>
+            }
+        <div style="margin-top:6px;"></div>
+        <hr />
+        <a asp-controller="Islemler" asp-action="SiparisiIptalEt" asp-route-siparisId="@siparis.siparisId" asp-route-masaNo="@Model.masaNo">*Siparişi İptal Et !!</a>
+    </div>
+    }
+
+
+
+    <form asp-controller="Islemler" asp-action="MasayaSiparisEkle" asp-route-masaNo="@Model.masaNo"  style="margin-top:40px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-success" value="Masa İçin Sipariş Ekle" />
+            </div>
+        </div>
+    </form>
+
+    <hr />
+
+
+    <div style="border:2px solid red; padding:15px; margin-top:80px; margin-bottom:40px">
+        <h4 style="">Toplam Ücret @total.ToString("0.00") TL </h4>
+
+
+        <form asp-controller="Islemler" asp-action="MasaOdemesiAlDogrulama"  asp-route-masaNo="@Model.masaNo" asp-route-total="@total" style="margin-top:30px;">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" class="btn btn-danger" value="Masa Ödemesi Al" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+}

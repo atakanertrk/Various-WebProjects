@@ -1,0 +1,29 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.BasinBultenlerimizModel;
+
+    <button type="button" class="btn btn-success"><a asp-controller="Home" asp-action="Index" style="color:whitesmoke; font-weight:bold; text-decoration:none">Ana Sayfa</a></button>
+    <hr />
+
+    <h4 style="font-weight:bold; margin-bottom:30px">Tüm Basın Bültenleri</h4>
+
+    <ul style="list-style:none">
+        @{
+            int counter = 1;
+            foreach (var bulten in Model.bultenler)
+            {
+                if (counter >= 100)
+                {
+                    break;
+                }
+                <li style="margin-bottom:15px">
+                    <p style="font-weight:bold"> @bulten.Tarih.ToShortDateString()</p>
+                    <h4 style="color:darkred" class="text-break"> @bulten.Baslik </h4>
+                    <p class="text-break"><a href="@bulten.Link">@bulten.Link</a></p>
+                    @{ string fileName = bulten.Id.ToString() + ".doc";}
+                    <p><a href="~/Resources/Documents/BasinBultenleri/@fileName" download="basinbulteni">  Bülteni İndirmek İçin Tıklayın</a></p>
+                    <hr />
+                </li>
+                counter += 1;
+            }
+        }
+
+    </ul>

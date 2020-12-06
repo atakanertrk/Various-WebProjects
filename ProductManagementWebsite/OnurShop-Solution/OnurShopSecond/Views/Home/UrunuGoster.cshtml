@@ -1,0 +1,49 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "UrunuGoster";
+}
+
+
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>Ürün Numarası</th>
+            <th>Ürün Adı</th>
+            <th>Ürün Miktarı</th>
+            <th>Ürün Ücreti (TL)</th>
+            <th>Ürün Özellikleri</th>
+            <th>Ürün Gurubu</th>
+            <th>Gurup Numarası</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.urunModel.ProductId</td>
+            <td>@Model.urunModel.ProductName</td>
+            <td>@Model.urunModel.Amount</td>
+            <td>@Model.urunModel.Price</td>
+            <td>@Model.urunModel.Properties</td>
+            <td>@Model.UrunGurubununAdi</td>
+            <td>@Model.urunModel.GroupId</td>
+            <td>
+                <img src="~/images/tek.png" alt="ürün" width="100" height="100" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+@{
+    string qrcodename = $"{Model.urunModel.ProductId}.png";
+}
+<h4>QR kodunu png olarak indirmek için koda tıkla</h4>
+<h4>Ürünün id numarası olarak indirilir</h4>
+<h4>QR kodu bu sayfanın adresidir, okutulduğunda bu ürün sayfası açılır</h4>
+<a download="@qrcodename" href="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.qrCode))">
+    <img alt="qr kodu" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(Model.qrCode))" width="200" height="200">
+</a>
+
+
+
+
+
+<h3 style="text-align:center; padding-top:30px;"> Ekstra bilgi bulunmuyor </h3>
+

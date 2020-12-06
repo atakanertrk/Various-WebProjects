@@ -1,0 +1,61 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "TumUrunGuruplariniGoster";
+}
+
+
+@{
+
+    <div class="btn btn-outline-dark">
+        <a href="@Url.Action("Index", "Backup")" style="font-weight:bold; color:black">
+            Bütün Ürünleri Excel Dosyası Olarak İndir (.xlsx)
+        </a>
+    </div>
+
+    <h5 style="color:black; margin-top:20px;">Ürün Ara (Ürün Adı) </h5>
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col-md-4">
+            <form asp-controller="Home" asp-action="HUrunAra">
+                <div class="form-group">
+                    <input asp-for="arananText" placeholder="boşluk bırakmadan tek kelime girin" class="form-control" required autocomplete="off" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Ara" class="btn btn-outline-dark" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <h3 style="font-weight:bold; color:darkred"> Ürün Gurupları </h3>
+
+    <table class="table table-hover table-bordered table-responsive">
+        <thead>
+            <tr>
+                <th>Ürün Gurubu</th>
+                <th>Gurup Numarası</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.urunGurubuListesi)
+            {
+                <tr>
+                    <td>@item.GroupName</td>
+                    <td>@item.GroupId</td>
+                    <td>
+                        <img src="~/images/gurup.png" alt="ürün gurubu" width="100" height="100" />
+                    </td>
+                    <td>
+                        <div class="btn btn-success">
+                            <a href="@Url.Action("UrunGurubunuGoster", "Home",new { selectedGroupId = item.GroupId })" style="font-weight:bold; color:black">
+                                Gurubu Görüntüle
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+}

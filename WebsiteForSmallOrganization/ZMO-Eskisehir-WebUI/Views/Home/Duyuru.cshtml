@@ -1,0 +1,13 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+@{
+    <button type="button" class="btn btn-success"><a asp-controller="Home" asp-action="Index" style="color:whitesmoke; font-weight:bold; text-decoration:none">Ana Sayfa</a></button>
+    <hr />
+
+    foreach (var duyuru in Model.duyuruModel.duyurular)
+    {
+        <h5 style="font-weight:bold">@duyuru.Tarih.ToShortDateString()</h5>
+        <h4 style="font-weight:bold; color:darkred" class="text-break">@duyuru.Baslik</h4>
+        <p class="text-break">@duyuru.Metin</p>
+        <p class="text-break"><a href="@duyuru.Link">@duyuru.Link</a></p>
+    }
+}

@@ -1,0 +1,20 @@
+﻿
+yayına alma ayarları:
+
+Controllerların içerisinde oluşturulan dataAccess instance değiştir
+
+GurupIcreigi.cshtml, menuduzenle.cshtml içerisinde data access instance oluşturuluyor, manuel olarak değiştirilmeli
+
+baseUrl storage classında değiştirilmeli. Sonunda '/' olmamalı
+
+yayındaki images klasörünü aktarmayı unutma
+
+masayasiparisekle.cshtml dataaccess değistir
+
+
+---- yapacaklarım ---
+  
+  masaya not ekleyebilme
+  ödeme alınca not silinir
+
+  porsiyon olarak ayarla, decimal yap adet olayını

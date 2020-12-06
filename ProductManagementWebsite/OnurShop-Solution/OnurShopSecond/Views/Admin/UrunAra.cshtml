@@ -1,0 +1,52 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@using OnurShopSecond.DataAccess;
+@{
+    ViewData["Title"] = "UrunAra";
+}
+@{
+    IDataAccess dataAccess = Model.dataAccess;
+}
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr>
+            <h3 style="text-align:center; font-weight:bolder"> --Bulunan Ürünler-- </h3>
+        </tr>
+        <tr>
+            <th>Ürün Numarası</th>
+            <th>Ürün Adı</th>
+            <th>Ürün Miktarı</th>
+            <th>Ürün Ücreti (TL)</th>
+            <th>Ürün Özellikleri</th>
+            <th>Gurubu</th>
+            <th>GurupNumarası</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.urunListesi)
+        {
+            <tr>
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.Amount</td>
+                <td>@item.Price</td>
+                <td>@item.Properties</td>
+                <td>@dataAccess.GetGroupNameFromGroupId(item.GroupId)</td>
+                <td>@item.GroupId</td>
+                <td>
+                    <div class="btn btn-success">
+                        <a href="@Url.Action("UrunuDuzenle", "Admin",new { selectedProductId = item.ProductId })" style="font-weight:bold; color:black">
+                            Düzenle
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn btn-danger">
+                        <a href="@Url.Action("UrunGurubundakiUrunuSil", "Admin",new { selectedProductId = item.ProductId })" style="font-weight:bold; color:white">
+                            Sil
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

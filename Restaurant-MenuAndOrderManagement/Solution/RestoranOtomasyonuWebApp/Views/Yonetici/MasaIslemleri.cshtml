@@ -1,0 +1,65 @@
+﻿@model RestoranOtomasyonuWebApp.Models.MasaEkleSilModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+    int siradakiMasaNo = 1;
+    if (Model.tumMasaNumaralari.Count > 0)
+    {
+        siradakiMasaNo = Model.tumMasaNumaralari.Max() + 1;
+    }
+    <form asp-controller="Yonetici" asp-action="Index" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+    <div>
+        <h4>Yeni Masa Ekle</h4>
+        <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="MasaEkle">
+            <div class="form-group">
+                <div class="col-md-10">
+                    Masa Numarası :
+                    <input asp-for="MasaNo" type="number" value="@siradakiMasaNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Ekle" class="btn btn-info" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <hr />
+
+    <div>
+        <h4 style="text-align:center">Tüm Masalar</h4>
+        @{
+            <div class="container">
+                <div class="row">
+                    @foreach (var no in Model.tumMasaNumaralari)
+                    {
+                        <div class="col-sm" style="border:2px solid green; margin:10px;">
+                            <h4>@no</h4>
+                            <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="MasaSil">
+                                <div class="form-group">
+                                    <div>
+                                        <input asp-for="MasaNo" value="@no" hidden required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input type="submit" value="Sil" class="btn btn-danger" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}

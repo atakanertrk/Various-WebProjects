@@ -1,0 +1,205 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+@{
+
+    <button type="button" class="btn btn-success"><a asp-controller="Home" asp-action="Index" style="color:whitesmoke; font-weight:bold; text-decoration:none">Ana Sayfa</a></button>
+    <hr />
+
+    if ( Model.searchValue == null || Model.searchValue.Length < 3)
+    {
+        <h4>Arama için en az dört harf giriniz..</h4>
+    }
+    else
+    {
+        <div>
+            <div>
+                @{
+                    if (Model.haberModel.haberler != null && Model.haberModel.haberler.Count > 0)
+                    {
+                        <h3>Bulunan Haberler</h3>
+                        <ul style="list-style:none">
+                            @{
+                                int counter = 1;
+                                foreach (var haber in Model.haberModel.haberler)
+                                {
+                                    if (counter >= 100)
+                                    {
+                                        break;
+                                    }
+                                    <li style="margin-bottom:15px">
+                                        @{ string imageName = haber.Id.ToString() + ".jpg";}
+                                        <img src="~/Resources/Images/Haberler/@imageName" alt="haber fotografi" style="max-width:30%" />
+                                        <p style="font-weight:bold">@haber.Tarih.ToShortDateString()</p>
+                                        <h4 style="color:darkred" class="text-break">@haber.Baslik</h4>
+                                        <p class="text-break">@haber.Metin</p>
+                                        <p class="text-break"><a href="@haber.Link" target="_blank">@haber.Link</a></p>
+                                        <hr />
+                                    </li>
+                                    counter += 1;
+                                }
+                            }
+
+                        </ul>
+                        <hr />
+                    }
+                }
+            </div>
+
+            <div>
+                @{
+                    if (Model.etkinlikModel.etkinlikler != null && Model.etkinlikModel.etkinlikler.Count > 0)
+                    {
+                        <h3>Bulunan Etkinlikler</h3>
+                        <ul>
+                            @{
+                                int counter = 1;
+                                foreach (var etkinlik in Model.etkinlikModel.etkinlikler)
+                                {
+                                    if (counter >= 100)
+                                    {
+                                        break;
+                                    }
+                                    <li style="list-style:none">
+                                        @{ string imageName = etkinlik.Id.ToString() + ".jpg";}
+                                        <img src="~/Resources/Images/Etkinlikler/@imageName" alt="etkinlik fotografi" style="max-width:30%" />
+                                        <p style="font-weight:bold">@etkinlik.Tarih.ToShortDateString()</p>
+                                        <h4 style="color:darkred" class="text-break">@etkinlik.Baslik</h4>
+                                        <p class="text-break">@etkinlik.Metin</p>
+                                        <p class="text-break"><a href="@etkinlik.Link" target="_blank">@etkinlik.Link</a></p>
+                                        <hr />
+                                    </li>
+                                    counter += 1;
+                                }
+                            }
+                        </ul>
+                        <hr />
+                    }
+                }
+            </div>
+
+            <div>
+                @{
+                    if (Model.BasindaBizModel.basindaBizKayitlar != null && Model.BasindaBizModel.basindaBizKayitlar.Count > 0)
+                    {
+                        <h3>Bulunan Basinda Biz Kayıtları</h3>
+                        <ul style="list-style:none">
+                            @{
+                                int counter = 1;
+                                foreach (var basindaBiz in Model.BasindaBizModel.basindaBizKayitlar)
+                                {
+                                    if (counter >= 100)
+                                    {
+                                        break;
+                                    }
+                                    <li style="margin-bottom:15px">
+                                        <p style="font-weight:bold"> @basindaBiz.Tarih.ToShortDateString()</p>
+                                        <h4 style="color:darkred" class="text-break"> @basindaBiz.Baslik </h4>
+                                        @{ string imageName = basindaBiz.Id.ToString() + ".jpg";}
+                                        <img src="~/Resources/Images/BasindaBiz/@imageName" alt="basında biz fotografı" style="max-width:30%" />
+                                        <p class="text-break"><a href="@basindaBiz.Link">@basindaBiz.Link</a></p>
+                                        <hr />
+                                    </li>
+                                    counter += 1;
+                                }
+                            }
+                        </ul>
+                        <hr />
+                    }
+                }
+            </div>
+
+            <div>
+                @{
+                    if (Model.basinBultenlerimizModel.bultenler != null && Model.basinBultenlerimizModel.bultenler.Count > 0)
+                    {
+                        <h3>Bulunan Basın Bültenleri</h3>
+                        <ul style="list-style:none">
+                            @{
+                                int counter = 1;
+                                foreach (var bulten in Model.basinBultenlerimizModel.bultenler)
+                                {
+                                    if (counter >= 100)
+                                    {
+                                        break;
+                                    }
+                                    <li style="margin-bottom:15px">
+                                        <p style="font-weight:bold"> @bulten.Tarih.ToShortDateString()</p>
+                                        <h4 style="color:darkred" class="text-break"> @bulten.Baslik </h4>
+                                        <p class="text-break"><a href="@bulten.Link">@bulten.Link</a></p>
+                                        @{ string fileName = bulten.Id.ToString() + ".doc";}
+                                        <p><a href="~/Resources/Documents/BasinBultenleri/@fileName" download="basinbulteni">  Bülteni İndirmek İçin Tıklayın</a></p>
+                                        <hr />
+                                    </li>
+                                    counter += 1;
+                                }
+                            }
+                        </ul>
+                        <hr />
+                    }
+                }
+            </div>
+
+            <div>
+                @{
+                    if (Model.egitimlerModel.egitimler != null && Model.egitimlerModel.egitimler.Count > 0)
+                    {
+                        <h3>Bulunan Eğitimler</h3>
+                        <ul style="list-style:none">
+                            @{
+                                int counter = 1;
+                                foreach (var egitim in Model.egitimlerModel.egitimler)
+                                {
+                                    if (counter >= 100)
+                                    {
+                                        break;
+                                    }
+                                    <li style="margin-bottom:15px">
+                                        <p style="font-weight:bold"> @egitim.Tarih.ToShortDateString()</p>
+                                        <h4 style="color:darkred" class="text-break"> @egitim.Baslik </h4>
+                                        @{ string imageName = egitim.Id.ToString() + ".jpg";}
+                                        <img src="~/Resources/Images/Egitimlerimiz/@imageName" alt="eğitim fotoğrafı yok" style="max-width:30%">
+                                        <p class="text-break"> @egitim.Metin</p>
+                                        <p class="text-break"><a href="@egitim.Link">@egitim.Link</a></p>
+                                        <hr />
+                                    </li>
+                                    counter += 1;
+                                }
+                            }
+                        </ul>
+                        <hr />
+                    }
+                }
+            </div>
+
+            <div>
+                @{
+                    if (Model.duyuruModel.duyurular != null && Model.duyuruModel.duyurular.Count > 0)
+                    {
+                        <h3>Bulunan Duyurular</h3>
+                        <ul style="list-style:none">
+                            @{
+                                int counter = 1;
+                                foreach (var duyuru in Model.duyuruModel.duyurular)
+                                {
+                                    if (counter >= 100)
+                                    {
+                                        break;
+                                    }
+                                    <li style="margin-bottom:15px">
+                                        <p style="font-weight:bold">Tarih: @duyuru.Tarih.ToShortDateString()</p>
+                                        <h4 style="color:darkred" class="text-break">@duyuru.Baslik</h4>
+                                        <p class="text-break">@duyuru.Metin</p>
+                                        <p class="text-break"><a href="@duyuru.Link">@duyuru.Link</a></p>
+                                        <hr />
+                                    </li>
+                                    counter += 1;
+                                }
+                            }
+                        </ul>
+                        <hr />
+                    }
+                }
+            </div>
+        </div>
+    }
+
+}

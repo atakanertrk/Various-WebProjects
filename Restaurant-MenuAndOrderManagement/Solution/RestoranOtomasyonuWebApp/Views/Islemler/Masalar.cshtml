@@ -1,0 +1,90 @@
+﻿@model RestoranOtomasyonuWebApp.Models.MasalarModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+    <form asp-controller="Islemler" asp-action="Index" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+
+    <hr />
+
+    <div>
+        <h4 style="text-align:center">Tüm Masalar</h4>
+        @{
+            dynamic dataAccess;
+            if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+            {
+                dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+            }
+            else
+            {
+                dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+            }
+            <div class="container">
+                        <div class="row">
+                            @foreach (var no in Model.masaNoList)
+                            {
+                                string teslimEdildiMi = "";
+                                decimal total = 0;
+                                var masaSiparisleri = dataAccess.GetMasaSiparisleri(no);
+                                string masaNotu = dataAccess.GetMasaNotu(no);
+                                foreach (var siparis in masaSiparisleri)
+                                {
+                                    if (siparis.teslimEdildiMi == "hayir") { teslimEdildiMi = "hayir"; }
+                                    total += siparis.adet * dataAccess.UrunBilgileriByUrunId(siparis.urunId).urunFiyati;
+                                }
+                                //decimal toplamUcret = dataAccess.MasaToplamUcreti(no);
+                                if (total > 0)
+                                {
+                                    if (teslimEdildiMi == "hayir")
+                                    {
+                                        <div class="col-sm" style="border:1px solid yellow; min-width:150px; margin:10px;  background-color:rgba(255, 216, 0,0.3)  ">
+                                            <h4>No: @no</h4>
+                                            <p><span style="font-weight:bold">masa notu:</span> @masaNotu</p>
+                                            <h5 style="color:darkgoldenrod">teslim edilmemiş siparişler var !</h5> <br/>
+                                            <a asp-controller="Islemler" asp-action="Masa"  asp-route-masaNo="@no">Masa Bilgileri</a>
+                                            <p style="font-weight:bold">@total.ToString("0.00") TL</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-sm" style="border:2px solid green; min-width:150px; margin:10px; background-color:rgba(0, 255, 33,0.3) ">
+                                            <h4>No: @no</h4>
+                                            <p><span style="font-weight:bold">masa notu:</span> @masaNotu</p>
+                                            <h5 style="color:darkgreen">siparişler teslim edilmiş</h5> <br />
+                                            <a asp-controller="Islemler" asp-action="Masa" asp-route-masaNo="@no">Masa Bilgileri</a>
+                                            <p style="font-weight:bold">@total.ToString("0.00") TL</p>
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div class="col-sm" style="border:2px solid darkred; min-width:150px; margin:10px; background-color:rgb(255, 0, 0,0.3);">
+                                        <h4>No: @no</h4>
+                                        <p><span style="font-weight:bold">masa notu:</span> @masaNotu</p>
+                                        <h5 style="color:darkred">Boş Masa</h5> <br />
+                                        <a asp-controller="Islemler" asp-action="Masa" asp-route-masaNo="@no">Masa Bilgileri</a>
+                                        <p style="font-weight:bold">@total.ToString("0.00") TL</p>
+                                    </div>
+                                }
+                            }
+                        </div>
+            </div>
+        }
+    </div>
+
+
+ 
+
+
+
+    <div class="onhoverchangeopacity" style="position:fixed; right:30px; bottom:30px; z-index:3">
+        <a href="#" style="text-decoration:none; color:black"> <i style="font-size:30px;" class="fa">&#xf062;</i> </a>
+    </div>
+}

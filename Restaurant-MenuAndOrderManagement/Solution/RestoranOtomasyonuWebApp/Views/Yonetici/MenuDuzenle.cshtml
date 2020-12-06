@@ -1,0 +1,111 @@
+﻿@model RestoranOtomasyonuWebApp.Models.MenuDuzenleModel;
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+@{
+
+    <form asp-controller="Yonetici" asp-action="Index"  style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+    <h3>Menü İçerisindeki Guruplar Aşağıda Listelenmiştir</h3>
+    <hr />
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+    var urunguruplari = dataAccess.UrunGuruplari();
+
+    <div style="padding-left:10%; margin-top:40px; margin-bottom:40px; border:2px solid darkgreen">
+        <h4 style="color:darkgreen">yeni gurup oluştur:</h4>
+        <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="YeniGurupOlustur">
+            <div class="form-group">
+                <div class="col-md-10" style="margin-top:15px">
+                    Fotoğraf seçin :
+                    <input type="file" name="files" multiple />
+                </div>
+                <div class="col-md-10" style="margin-top:15px">
+                    Gurup Adını Girin <input asp-for="yeniGurupAdi" placeholder="örn: içecekler" autocomplete="off"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" class="btn btn-outline-success" value="Ekle" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+    foreach (var gurup in urunguruplari)
+    {
+        string imagename = gurup.Id.ToString() + ".jpg";
+
+        <h3 style="text-align:center; margin-bottom:10px; word-break:break-all">-- @gurup.gurupAdi --</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <img src="~/images/urungurubufoto/@imagename" alt="@gurup.gurupAdi" class="img-fluid" style="max-width:60%!important;" />
+                </div>
+                <div class="col-sm">
+                    <form asp-controller="Yonetici" asp-action="GurupIcerigi"  asp-route-gurupId="@gurup.Id" style="margin-top:30px">
+                        <div class="form-group">
+                            <input type="submit" value="@gurup.gurupAdi İçeriği" class="btn btn-dark" />
+                        </div>
+                    </form>
+                    <hr />
+                    <form method="post" enctype="multipart/form-data" asp-controller="Yonetici" asp-action="GurupResmiDegistir">
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                @gurup.gurupAdi Fotoğrafı Değiştirmek İçin Fotoğraf Seçin ve Değiştir'e tıklayın
+                                <input type="file" name="files" multiple />
+                            </div>
+                            <div class="col-md-10">
+                                <input asp-for="gurupId" value="@gurup.Id" required hidden />
+                            </div>
+                            <div class="col-md-10" style="margin-top:5px;">
+                                <input type="submit" class="btn btn-outline-info" value="Değiştir" />
+                            </div>
+                        </div>
+                    </form>
+
+                    <hr />
+
+                    <form asp-controller="Yonetici" asp-action="GurupAdiDegistir">
+                        <div class="form-group">
+                            <input asp-for="gurupId" value="@gurup.Id" required hidden />
+                            Yeni Gurup Adı<input asp-for="yeniGurupAdi" value="@gurup.gurupAdi" required autocomplete="off"/>
+                            <input type="submit" value="Gurup Adını Değiştir" class="btn btn-outline-secondary" />
+                        </div>
+                    </form>
+
+                    <hr />
+
+                    <form asp-controller="Yonetici" asp-action="GurubuSil">
+                        <div class="form-group">
+                            <input asp-for="gurupId" value="@gurup.Id" required hidden />
+                            <p style="font-weight:bold; color:darkred">Gurubu Silmek İçeriğindeki Tüm Diğer Ürünleri De Siler !</p>
+                            <input type="submit" value=" @gurup.gurupAdi Gurubunu Sil" class="btn btn-danger" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top:60px; margin-bottom:60px;">
+            <hr />
+        </div>
+
+
+    }
+
+}

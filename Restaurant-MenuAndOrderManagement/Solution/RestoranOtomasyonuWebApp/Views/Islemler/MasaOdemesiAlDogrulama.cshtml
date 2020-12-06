@@ -1,0 +1,46 @@
+﻿@model RestoranOtomasyonuWebApp.Models.MasaUcretiModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+    <div style="margin-top:70px;"></div>
+
+    <form asp-controller="Islemler" asp-action="Masa" asp-route-masaNo="@Model.masaNo" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-info" value="İptal" />
+            </div>
+        </div>
+    </form>
+
+    <hr />
+
+    <h4>@Model.masaNo Numaralı Masanın @Model.masaUcreti.ToString("0.00") TL Ücretini Aldığınızı Onaylayın</h4>
+
+    string masaNotu;
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+    masaNotu = dataAccess.GetMasaNotu(Model.masaNo);
+    <hr />
+
+    <h5><span style="color:darkred">Masa Notu : </span>  @masaNotu  </h5>
+
+    <hr />
+
+    <form asp-controller="Islemler" asp-action="MasaOdemesiAl" asp-route-masaNo="@Model.masaNo" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-danger" value="Masa Ödemesini Onayla" />
+            </div>
+        </div>
+    </form>
+    <hr />
+
+}

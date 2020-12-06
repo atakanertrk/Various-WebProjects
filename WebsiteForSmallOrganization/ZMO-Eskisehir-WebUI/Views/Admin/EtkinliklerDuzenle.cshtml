@@ -1,0 +1,93 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+
+<form asp-controller="Admin" asp-action="Index">
+    <div class="form-group">
+        <input type="text" asp-for="password" value="@Model.password" class="form-control" readonly hidden autocomplete="off" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="panel ana sayfasına dön" class="btn btn-secondary" />
+    </div>
+</form>
+<h3 style="color:darkred">Not: Dosya Seçim İşlemi Ekle Butonuna Tıklanıldıktan Sonra Yapılır</h3>
+<h3>Etkinlik Ekleme</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="EtkinlikEkle" method="post">
+            <div class="form-group">
+                <label>Etkinlik Başlığı</label>
+                <input asp-for="etkinlikModel.Baslik" class="form-control" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Tarih</label>
+                <input asp-for="etkinlikModel.Tarih" class="form-control" value="@DateTime.UtcNow.AddHours(3)" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Etkinlik ile ilgili bir link ekleyin. Eklemek istemiyorsanız nokta koyun</label>
+                <input asp-for="etkinlikModel.Link" class="form-control" type="text" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label for="metintextarea">Etkinliği açıklayan metin girin</label>
+                <textarea class="form-control" asp-for="etkinlikModel.Metin" id="metintextarea" rows="5" required autocomplete="off"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="password" class="form-control" readonly hidden autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Etkinlik Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<hr />
+
+<h3>Bütün Etkinlikler Aşağıda Listelenmiştir. Etkinliği Sil seçeneği ile ilgili etkinliği silebilirsiniz</h3>
+<br />
+
+@{
+    <ul style="list-style:none">
+        @{
+            int counter = 0;
+            foreach (var etkinlik in Model.etkinlikModel.etkinlikler)
+            {
+                if (counter >= 100)
+                {
+                    break;
+                }
+                <li style="margin-bottom:15px">
+                    @{ string imageName = etkinlik.Id.ToString() + ".jpg";}
+                    <img src="~/Resources/Images/Etkinlikler/@imageName" alt="etkinlik fotografi" style="max-width:40%" />
+                    <p style="font-weight:bold">@etkinlik.Tarih.ToShortDateString()</p>
+                    <h4 class="text-break" style="color:darkred;">@etkinlik.Baslik</h4>
+                    <p class="text-break">@etkinlik.Metin</p>
+                    <p class="text-break"><a href="@etkinlik.Link" target="_blank">@etkinlik.Link</a></p>
+                    <form asp-controller="Admin" asp-action="EtkinlikSil">
+                        <div class="form-group">
+                            <input asp-for="id" value="@etkinlik.Id" class="form-control" hidden readonly autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="password" class="form-control" readonly hidden autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Etkinliği Sil" class="btn btn-danger" />
+                        </div>
+                    </form>
+                    <form asp-controller="Admin" asp-action="EtkinlikUpdate">
+                        <div class="form-group">
+                            <input asp-for="id" value="@etkinlik.Id" class="form-control" hidden readonly autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="password" value="@Model.password" class="form-control" hidden readonly autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Etkinlik Bilgilerini Değiştir" class="btn btn-info" />
+                        </div>
+                    </form>
+                    <hr />
+                </li>
+                counter += 1;
+            }
+        }
+    </ul>
+}

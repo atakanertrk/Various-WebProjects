@@ -1,0 +1,43 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@using OnurShopSecond.DataAccess;
+@{
+    ViewData["Title"] = "HUrunAra";
+}
+@{
+    IDataAccess dataAccess = Model.dataAccess;
+}
+<table class="table table-hover table-bordered table-responsive">
+    <thead>
+        <tr>
+            <th>Ürün Numarası</th>
+            <th>Ürün Adı</th>
+            <th>Ürün Miktarı</th>
+            <th>Ürün Ücreti (TL) </th>
+            <th>Ürün Özellikleri</th>
+            <th>Gurubu</th>
+            <th>Gurup Numarası</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.urunListesi)
+        {
+        <tr>
+            <td>@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.Amount</td>
+            <td>@item.Price</td>
+            <td>@item.Properties</td>
+            <td>@dataAccess.GetGroupNameFromGroupId(item.GroupId)</td>
+            <td>@item.GroupId</td>
+            <td>
+                <div class="btn btn-success">
+                    <a href="@Url.Action("UrunuGoster", "Home",new { selectedProductId = item.ProductId })" style="font-weight:bold; color:black">
+                        Ürünü Görüntüle
+                    </a>
+                </div>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

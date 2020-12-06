@@ -1,0 +1,28 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "UrunGurubununAdiniDegistir";
+}
+
+    <h2> @Model.UrunGurubununAdi Gurubunun Adı</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="UrunGurubununAdiniDegistir">
+            <div class="form-group">
+                <label>Geçerli Gurup Id</label>
+                <input asp-for="UrunGurubununId" value="@Model.UrunGurubununId" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label>Geçerli Gurup Adı</label>
+                <input value="@Model.UrunGurubununAdi" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+                <label>Yeni Gurup Adı</label>
+                <input asp-for="YeniGurupAdi" class="form-control" required autocomplete="off"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Değiştir" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

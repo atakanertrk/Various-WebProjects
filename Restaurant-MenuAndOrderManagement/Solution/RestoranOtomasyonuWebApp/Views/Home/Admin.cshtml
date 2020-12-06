@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+@{
+    <form asp-controller="Home" asp-action="Index" style="margin-top:30px">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Restoran Ana Sayfasına Dön" />
+            </div>
+        </div>
+    </form>
+
+
+    <ul>
+        <li style="margin-top:30px;">
+            <a asp-controller="Yonetici" asp-action="YoneticiGiris" style="color:darkred; font-weight:bold"> Yönetici Giriş (menü, fiyat, stok durumu, ana sayfa bilgilerini ve masa sayılarını düzenleme) </a>
+        </li>
+        <li style="margin-top:30px;">
+            <a asp-controller="Islemler" asp-action="Index" style="color:darkblue; font-weight:bold"> Masa İşlemleri (Masa için sipariş oluşturma, ödeme alma, geçmiş ve aktif siparişleri görüntüleme) </a>
+        </li>
+    </ul>
+
+
+}

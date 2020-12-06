@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TMMOB Ziraat Mühendisleri Odası Eskişehir Şubesi</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="icon" href="~/favicon.ico">
+</head>
+<body>
+    <header>
+        @* navbar-expand-xl navbar-toggleable-xl *@
+        <nav class="navbar navbar-light border-bottom box-shadow mb-3">
+            <div class="container">
+                <a asp-controller="Home" asp-action="Index" class="animation"><img src="~/Resources/Images/tmmob.jpg" alt="logo" width="150" height="150" style="border-radius:50%"/></a>
+                @*<a asp-controller="Home" asp-action="Index"><img srcset="~/Resources/Images/header.jpg" alt="TMMOB Ziraat Mühendisleri Odası Eskişehir" width="461" height="138" /></a>*@
+                <a asp-controller="Home" asp-action="Index" class="animation"><h3 style="color:darkblue;" class="animation">TMMOB Ziraat Mühendisleri Odası Eskişehir Şubesi</h3></a>
+                @*<a class="navbar-brand font-weight-bold" style="color:green;" asp-area="" asp-controller="Home" asp-action="Index">TMMOB Ziraat Mühendisleri Odası - Eskişehir Şubesi</a>*@
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @*  navbar-collapse collapse d-xl-inline-flex flex-xl-row-reverse   *@
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="SubeTarihcesi">Şube Tarihçesi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="YonetimKuruluUyeleri">Yönetim Kurulu Üyeleri</a>
+                        </li>
+                        <li class="nav-item">
+                            <hr />
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="BasindaBizTumKayitlar">Basında Biz</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="TumBasinBultenleri">Basın Bültenleri</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Haberler">Tüm Haberler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Duyurular">Tüm Duyurular</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Etkinlikler">Tüm Etkinlikler</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="Egitimler">Tüm Egitimler</a>
+                        </li>
+                        <li class="nav-item">
+                            <hr />
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark font-weight-bold" asp-area="" asp-controller="Home" asp-action="UyelikIslemleri">Üyelik İşlemleri</a>
+                        </li>
+                        @*<li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark font-weight-bold" href="#" id="uyelik-islemleri" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Üyelik İşlemleri
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="uyelik-islemleri">
+                                    <a class="dropdown-item" asp-controller="Home" asp-action="Kayit">Kayıt</a>
+                                </div>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="GoTop">
+        <a href="#">^</a>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Ziraat Mühendisleri Odası <span class="break" style="font-weight:bold">Eskişehir Şubesi</span>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

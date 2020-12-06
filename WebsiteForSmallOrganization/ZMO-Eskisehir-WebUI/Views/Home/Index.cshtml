@@ -1,0 +1,415 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+<!--ICONS https://icons.getbootstrap.com -->
+
+<div>
+    <nav class="navbar navbar-light bg-light">
+        <form class="form-inline" asp-controller="Home" asp-action="SitedeAra" method="post">
+            <input class="form-control mr-sm-2" type="search" placeholder="" aria-label="Search" asp-for="searchValue">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sitede Ara</button>
+        </form>
+    </nav>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg" style="margin-top:5%">
+            <div class="card text-center">
+                <div class="card-header">
+                    <a asp-controller="Home" asp-action="Etkinlikler">
+                        <h4 style="color:darkblue">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-briefcase" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M0 12.5A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-6h-1v6a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-6H0v6z" />
+                                <path fill-rule="evenodd" d="M0 4.5A1.5 1.5 0 0 1 1.5 3h13A1.5 1.5 0 0 1 16 4.5v2.384l-7.614 2.03a1.5 1.5 0 0 1-.772 0L0 6.884V4.5zM1.5 4a.5.5 0 0 0-.5.5v1.616l6.871 1.832a.5.5 0 0 0 .258 0L15 6.116V4.5a.5.5 0 0 0-.5-.5h-13zM5 2.5A1.5 1.5 0 0 1 6.5 1h3A1.5 1.5 0 0 1 11 2.5V3h-1v-.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5V3H5v-.5z" />
+                            </svg>
+                            Etkinlikler
+                        </h4>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators1" data-slide-to="5"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a asp-action="Etkinlikler" asp-controller="Home"><img class="d-block slider-image" src="~/Resources/Images/Black.png" alt="second slide"></a>
+                                <div class="carousel-caption d-none d-sm-block" style="background-color:white">
+                                    <a asp-action="Etkinlikler" asp-controller="Home"><p style="color:black">Tüm Etkinlikleri Görmek İçin Tıklayın</p></a>
+                                </div>
+                            </div>
+                            @{
+                                if (Model.etkinlikModel.etkinlikler != null && Model.etkinlikModel.etkinlikler.Count != 0)
+                                {
+                                    int counter2 = 0;
+                                    foreach (var etkinlik in Model.etkinlikModel.etkinlikler)
+                                    {
+                                        if (counter2 > 4)
+                                        {
+                                            break;
+                                        }
+                                        string imageNumber2 = etkinlik.Id.ToString() + ".jpg";
+                                        <div class="carousel-item">
+                                            <a asp-action="Etkinlik" asp-controller="Home" asp-route-id="@etkinlik.Id"><img class="d-block slider-image" src="~/Resources/Images/Etkinlikler/@imageNumber2" alt="etkinlik fotoğrafı bulunamadı"></a>
+                                            <div class="carousel-caption d-none d-sm-block" style="background-color:rgba(0,0,0,0.4)">
+                                                <p>@etkinlik.Baslik</p>
+                                            </div>
+                                        </div>
+                                        counter2 += 1;
+                                    }
+                                }
+
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators1" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators1" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg" style="margin-top:5%">
+            <div class="card text-center">
+                <div class="card-header">
+                    <a asp-controller="Home" asp-action="Haberler">
+                        <h4 style="color:darkblue">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            </svg>
+                            Haberler
+                        </h4>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators2" data-slide-to="5"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a asp-action="Haberler" asp-controller="Home"><img class="d-block slider-image" src="~/Resources/Images/Black.png" alt="second slide"></a>
+                                <div class="carousel-caption d-none d-sm-block" style="background-color:white">
+                                    <a asp-action="Haberler" asp-controller="Home"><p style="color:black">Tüm Haberleri Görmek İçin Tıklayın</p></a>
+                                </div>
+                            </div>
+                            @{
+                                if (Model.haberModel.haberler != null && Model.haberModel.haberler.Count != 0)
+                                {
+                                    int counter3 = 0;
+                                    foreach (var haber in Model.haberModel.haberler)
+                                    {
+                                        if (counter3 > 4)
+                                        {
+                                            break;
+                                        }
+                                        string imageNumber = haber.Id.ToString() + ".jpg";
+                                        <div class="carousel-item">
+                                            <a asp-action="Haber" asp-controller="Home" asp-route-id="@haber.Id"><img class="d-block slider-image" src="~/Resources/Images/Haberler/@imageNumber" alt="haber fotoğrafı bulunamadı"></a>
+                                            <div class="carousel-caption d-none d-sm-block" style="background-color:rgba(0,0,0,0.4)">
+                                                <p>@haber.Baslik</p>
+                                            </div>
+                                        </div>
+                                        counter3 += 1;
+                                    }
+                                }
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators2" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--BasindaBiz ve BasinBultenleri-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg" style="margin-top:5%">
+            <div class="card text-center">
+                <div class="card-header">
+                    <a asp-controller="Home" asp-action="BasindaBizTumKayitlar">
+                        <h4 style="color:darkblue">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bookmark-star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z" />
+                                <path d="M7.84 4.1a.178.178 0 0 1 .32 0l.634 1.285a.178.178 0 0 0 .134.098l1.42.206c.145.021.204.2.098.303L9.42 6.993a.178.178 0 0 0-.051.158l.242 1.414a.178.178 0 0 1-.258.187l-1.27-.668a.178.178 0 0 0-.165 0l-1.27.668a.178.178 0 0 1-.257-.187l.242-1.414a.178.178 0 0 0-.05-.158l-1.03-1.001a.178.178 0 0 1 .098-.303l1.42-.206a.178.178 0 0 0 .134-.098L7.84 4.1z" />
+                            </svg>
+                            Basında Biz
+                        </h4>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div id="carouselExampleIndicators3" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators3" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators3" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators3" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators3" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators3" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators3" data-slide-to="5"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a asp-action="BasindaBizTumKayitlar" asp-controller="Home"><img class="d-block slider-image" src="~/Resources/Images/Black.png" alt="second slide"></a>
+                                <div class="carousel-caption d-none d-sm-block" style="background-color:white">
+                                    <a asp-action="BasindaBizTumKayitlar" asp-controller="Home"><p style="color:black">Tüm Basında Biz Kayıtları İçin Tıklayın</p></a>
+                                </div>
+                            </div>
+                            @{
+                                if (Model.BasindaBizModel.basindaBizKayitlar != null && Model.BasindaBizModel.basindaBizKayitlar.Count() != 0)
+                                {
+                                    int counter4 = 0;
+                                    foreach (var basindaBiz in Model.BasindaBizModel.basindaBizKayitlar)
+                                    {
+                                        if (counter4 > 4)
+                                        {
+                                            break;
+                                        }
+                                        string imageNumber3 = basindaBiz.Id.ToString() + ".jpg";
+                                        <div class="carousel-item">
+                                            <a asp-action="BasindaBiz" asp-controller="Home" asp-route-id="@basindaBiz.Id"><img class="d-block slider-image" src="~/Resources/Images/BasindaBiz/@imageNumber3" alt="basında biz fotoğrafı bulunamadı"></a>
+                                            <div class="carousel-caption d-none d-sm-block" style="background-color:rgba(0,0,0,0.4)">
+                                                <p>@basindaBiz.Baslik</p>
+                                            </div>
+                                        </div>
+                                        counter4 += 1;
+                                    }
+                                }
+
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators3" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators3" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg" style="margin-top:5%">
+            <div>
+                <div class="card text-center">
+                    <div class="card-header">
+                        <a asp-controller="Home" asp-action="TumBasinBultenleri">
+                            <h4 style="color:darkblue">
+                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-calendar2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z" />
+                                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z" />
+                                </svg>
+                                Basın Bültenlerimiz
+                            </h4>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <ul style="list-style:none">
+                            @{
+                                int counter1 = 0;
+                                foreach (var bulten in Model.basinBultenlerimizModel.bultenler)
+                                {
+                                    if (counter1 > 3)
+                                    {
+                                        break;
+                                    }
+                                    <li style="margin-bottom:15px">
+                                        <p style="font-weight:bold">Tarih: @bulten.Tarih.ToShortDateString()</p>
+                                        <h5 style="color:darkgreen; font-weight:bold; max-width:350px">@bulten.Baslik </h5>
+                                        @{ string fileName = bulten.Id.ToString() + ".doc";}
+                                        <p><a href="~/Resources/Documents/BasinBultenleri/@fileName" download="basinbulteni">  Bülteni İndirmek İçin Tıklayın (.doc dosyası)</a></p>
+                                        <hr />
+                                    </li>
+                                    counter1 += 1;
+                                }
+                            }
+                            <li>
+                                <a asp-controller="Home" asp-action="TumBasinBultenleri" style="font-weight:bold">Tüm Bültenleri Görüntülemek İçin Tıkla</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Eğitimler Duyurular-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg" style="margin-top:5%">
+            <div class="card text-center">
+                <div class="card-header">
+                    <a asp-controller="Home" asp-action="Egitimler">
+                        <h4 style="color:darkblue">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-book" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M1 2.828v9.923c.918-.35 2.107-.692 3.287-.81 1.094-.111 2.278-.039 3.213.492V2.687c-.654-.689-1.782-.886-3.112-.752-1.234.124-2.503.523-3.388.893zm7.5-.141v9.746c.935-.53 2.12-.603 3.213-.493 1.18.12 2.37.461 3.287.811V2.828c-.885-.37-2.154-.769-3.388-.893-1.33-.134-2.458.063-3.112.752zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                            </svg>
+                            Eğitimlerimiz
+                        </h4>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div id="carouselExampleIndicators4" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carouselExampleIndicators4" data-slide-to="0" class="active"></li>
+                            <li data-target="#carouselExampleIndicators4" data-slide-to="1"></li>
+                            <li data-target="#carouselExampleIndicators4" data-slide-to="2"></li>
+                            <li data-target="#carouselExampleIndicators4" data-slide-to="3"></li>
+                            <li data-target="#carouselExampleIndicators4" data-slide-to="4"></li>
+                            <li data-target="#carouselExampleIndicators4" data-slide-to="5"></li>
+                        </ol>
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a asp-action="Egitimler" asp-controller="Home"><img class="d-block slider-image" src="~/Resources/Images/Black.png" alt="second slide"></a>
+                                <div class="carousel-caption d-none d-sm-block" style="background-color:white">
+                                    <a asp-action="Egitimler" asp-controller="Home"><p style="color:black">Tüm Eğitimlerimizi Görmek İçin Tıklayın</p></a>
+                                </div>
+                            </div>
+                            @{
+                                if (Model.egitimlerModel.egitimler != null && Model.egitimlerModel.egitimler.Count != 0)
+                                {
+                                    int counter5 = 0;
+                                    foreach (var egitim in Model.egitimlerModel.egitimler)
+                                    {
+                                        if (counter5 > 4)
+                                        {
+                                            break;
+                                        }
+                                        <div class="carousel-item">
+                                            @{ string imageNumber5 = egitim.Id.ToString() + ".jpg";}
+                                            <a asp-action="Egitim" asp-controller="Home" asp-route-id="@egitim.Id"><img class="d-block slider-image" src="~/Resources/Images/Egitimlerimiz/@imageNumber5" alt="eğitimlerimiz fotoğrafı bulunamadı"></a>
+                                            <div class="carousel-caption d-none d-sm-block" style="background-color:rgba(0,0,0,0.4)">
+                                                <p>@egitim.Baslik</p>
+                                            </div>
+                                        </div>
+                                        counter5 += 1;
+                                    }
+                                }
+
+                            }
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators4" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators4" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg" style="margin-top:5%">
+            <div class="card text-center">
+                <div class="card-header">
+                    <a asp-controller="Home" asp-action="Duyurular">
+                        <h4 style="color:darkblue">
+                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bell" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z" />
+                                <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+                            </svg>
+                            Duyurular
+                        </h4>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <ul style="list-style:none">
+                        @{
+                            int counter6 = 0;
+                            foreach (var duyuru in Model.duyuruModel.duyurular)
+                            {
+                                if (counter6 > 3)
+                                {
+                                    break;
+                                }
+                                <li style="margin-bottom:15px">
+                                    <p style="font-weight:bold">Tarih: @duyuru.Tarih.ToShortDateString()</p>
+                                    <h5 style="color:darkred; font-weight:bold; max-width:350px">@duyuru.Baslik </h5>
+                                    <a asp-action="Duyuru" asp-controller="Home" asp-route-id="@duyuru.Id">detayları görmek için tıklayın...</a>
+                                    <hr />
+                                </li>
+                                counter6 += 1;
+                            }
+                        }
+
+                        <li>
+                            <a asp-controller="Home" asp-action="Duyurular" style="font-weight:bold">Tüm Duyurular İçin Tıklayın</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Adres Footer-->
+
+<br />
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md" style="margin-top:5%">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h4 style="color:darkblue">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-building" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z" />
+                            <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z" />
+                        </svg>
+                        Ziraat Mühendisleri Odası Eskişehir Şubesi
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"> <span class="font-weight-bold">Eskişehir Şubesi Adres:</span> Akarbaşı Mah. Atatürk Caddesi Atam Apt.No:49/4 </h5>
+                    <h7 class="card-text"> <span style="color:darkblue; font-weight:bold">Tel:</span> 0.222.2313342 - <span style="color:darkblue;font-weight:bold">GSM:</span> 0.549.7274826 </h7>
+                </div>
+            </div>
+        </div>
+        <div class="col-md " style="margin-top:5%">
+            <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1533.3764192112178!2d30.518673847334288!3d39.76765741674413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cc1775a911adb1%3A0x3195977bf8a165ac!2sZiraat%20m%C3%BChendisleri%20odas%C4%B1!5e0!3m2!1str!2str!4v1599749007595!5m2!1str!2str" frameborder="0" style="border:0; max-width:300px" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

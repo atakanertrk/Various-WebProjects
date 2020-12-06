@@ -1,0 +1,43 @@
+﻿@model RestoranOtomasyonuWebApp.Models.UrunGurubuModel;
+@{ string baseUrl = RestoranOtomasyonuWebApp.Controllers.Storage.baseURL; }
+@{
+    int c1 = 0;
+
+    <div style="border:2px solid black; border-radius:5%; box-shadow:20px 20px 20px 20px #888888; background-color:rgba(0,0,0,0.1);">
+
+        <h2 class="underdogfont" style="text-align:center; margin-bottom:100px; margin-top:70px; color:darkred;">Menü</h2>
+        <div class="container">
+            <div class="row">
+                @{
+                    foreach (var gurup in Model.UrunGuruplariList)
+                    {
+                        string imagename = gurup.Id.ToString() + ".jpg";
+
+                        <div class="col-sm-4 menu-gurupdiv" data-aos="flip-left" style="text-align:center">
+                            <h3 class="underdogfont" style="word-break: break-word; margin-bottom:13px; color:darkgreen;">@gurup.gurupAdi</h3>
+                            @{ string urunGurubuUrl = $"{baseUrl}/menu/gurupicerigindekiurunler?id=" + gurup.Id.ToString(); }
+                            <a href="@urunGurubuUrl">
+                                <img src="~/images/urungurubufoto/@imagename" alt="@gurup.gurupAdi" class="img-fluid menu-gurupfoto onhoverchangeopacity" />
+                            </a>
+                        </div>
+
+
+                        c1 += 1;
+
+                    }
+                }
+            </div>
+        </div>
+
+        <div style="margin-bottom:30px;"> </div>
+
+    </div>
+
+    <div class="onhoverchangeopacity" style="position:fixed; right:30px; bottom:30px; z-index:3; ">
+        <a href="#" style="text-decoration:none; color:black"> <i style="font-size:30px" class="fa">&#xf062;</i> </a>
+    </div>
+
+
+    <div style="margin-bottom:200px; margin-top:150px"></div>
+
+}

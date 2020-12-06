@@ -1,0 +1,216 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+body, header {
+    background-image: url('../images/backgroundimage.jpg');
+}
+
+header nav {
+    background-image: url('../images/backgroundimage.jpg');
+}   
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/* AOS ANIMATION START*/
+/*
+* {
+    box-sizing: border-box;
+}
+
+.item {
+    margin-top:550px;
+    border:3px solid red;
+    padding:100px;
+}
+*/
+/* AOS ANIMATION END */
+
+
+.mainpage-menu-image {
+    border-radius: 50%;
+    max-width: 80% !important;
+}
+
+.mainpage-header {
+    margin-bottom: 50px;
+    font-size: 50px;
+}
+
+.menu-gurupdiv {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.onhoverchangeopacity:hover {
+    opacity:0.5;
+}
+
+    .menu-gurupdiv img {
+        border-radius: 25%;
+    }
+
+.menu-gurupfoto {
+    /* min-width: 300px; */
+    max-width: 40% !important;
+}
+
+.gurupicerigi-urun-div {
+    margin-bottom: 35px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.gurupicerigi-urun-div img {
+    /* min-width: 300px; */
+    border-radius:25%;
+    max-width:40%!important;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .gurupicerigi-urun-div {
+        margin-bottom: 20px;
+        margin-left: 6px;
+        margin-right: 6px;
+    }
+
+    .gurupicerigi-urun-div img {
+        /* min-width: 250px; */
+        border-radius: 25%;
+        max-width: 40% !important;
+    }
+
+    .mainpage-header {
+        margin-bottom: 20px;
+        font-size: 30px;
+    }
+
+    .mainpage-menu-image {
+        border-radius: 50%;
+        max-width: 90% !important;
+    }
+
+    .menu-gurupdiv {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+
+.yonetici-anasayfasi{
+
+}
+
+
+
+/* Animation Slide */
+@keyframes slideInFromTop {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.animationtop1 {
+    animation: 0.3s ease-out 0s 1 slideInFromTop;
+}
+
+.animationtop2 {
+    animation: 0.5s ease-out 0s 1 slideInFromTop;
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.animationleft1 {
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+.animationleft2 {
+    animation: 0.8s ease-out 0s 1 slideInFromLeft;
+}
+
+.animationleft3 {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
+}
+
+/* Animation Slide END*/

@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{ string baseUrl = RestoranOtomasyonuWebApp.Controllers.Storage.baseURL; }
+
+
+@{
+     dynamic dataAccess;
+     if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+     {
+         dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+     }
+     else
+     {
+         dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+     }
+    var ekstra = dataAccess.GetSiteEkstra();
+}
+
+
+
+<div class="container" style="text-align:center">
+    <div class="row">
+        <div class="col-sm">
+            <div class="text-center">
+
+                <h2 class="display-4 mainpage-header underdogfont" data-aos="flip-up">Hoş Geldiniz</h2>
+
+                <div style="margin-bottom:10px;">
+                    <p class="underdogfont" data-aos="fade-down" style="margin-bottom:5px;"> Menümüz  </p>
+                    <i style="font-size:20px" class="fa" data-aos="fade-down">&#xf078;</i>
+                </div>
+
+                <a href="@baseUrl/menu" class="onhoverchangeopacity">
+                    <img src="~/images/menu.jpg" alt="menu" class="img-fluid mainpage-menu-image" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine" />
+                </a>
+
+            </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-sm underdogfont">
+            <div style="margin-top:30px;"></div>
+            <h4 style="color:darkgreen;">@ekstra.anaSayfaMesaji</h4>
+            <div style="margin-top:20px;"></div>
+            <i style="font-size:24px" class="fa">&#xf095;</i>  <span style="font-weight:bold">: @ekstra.telefon</span> <br/>
+            <i style="font-size:24px" class="fa">&#xf041;</i> <span style="font-weight:bold">: @ekstra.adresAciklama </span>
+            <hr />
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d29174.03206771191!2d30.512839677078524!3d39.77238205643091!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xef221d9bdb99f223!2zVGHFn2JhxZ_EsSBLdW1kYSBLYWh2ZQ!5e0!3m2!1str!2str!4v1605554636028!5m2!1str!2str" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
+    </div>
+</div>
+
+
+

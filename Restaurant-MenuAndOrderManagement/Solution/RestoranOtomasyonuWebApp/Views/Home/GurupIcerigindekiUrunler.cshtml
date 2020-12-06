@@ -1,0 +1,53 @@
+﻿@model RestoranOtomasyonuWebApp.Models.UrunModel
+@{
+    <div style="border:2px solid black; border-radius:5%;  box-shadow:20px 20px 20px 20px #888888; background-color:rgba(0,0,0,0.1);">
+        <h3 class="underdogfont" style="text-align:center; color:darkred; margin-top:60px; margin-bottom:80px;">@Model.gurubununAdi</h3>
+        <div class="container">
+            <div class="row">
+                @{
+                    foreach (var urun in Model.urunlerlist)
+                    {
+                        string imagename = urun.Id.ToString() + ".jpg";
+
+                        if (urun.stokVarYok == "yok")
+                        {
+                            <div class="col-sm-4 gurupicerigi-urun-div underdogfont" data-aos="zoom-in" style="opacity:0.5"  >
+                                <p style="font-weight:bold; color:red">stokta yok</p>
+                                <h3 style="word-break: break-word; color:darkgreen">@urun.urunAdi</h3>
+                                <p style="word-break: break-word">@urun.urunAciklamasi</p>
+                                <p style="font-weight:bolder">@urun.urunFiyati ₺</p>
+
+                                <img src="~/images/urunfoto/@imagename" alt="@urun.urunAdi" name="@imagename" class="img-fluid" />
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-4 gurupicerigi-urun-div underdogfont" data-aos="zoom-in"  >
+                                <h3 style="word-break: break-all; color:darkgreen">@urun.urunAdi</h3>
+                                <p style="word-break: break-all">@urun.urunAciklamasi</p>
+                                <p style="font-weight:bolder">@urun.urunFiyati ₺</p>
+
+                                <img src="~/images/urunfoto/@imagename" alt="@urun.urunAdi" class="img-fluid" name="@imagename"/>
+
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="onhoverchangeopacity" style="width:80px; height:48px; position:fixed; left:46%; bottom:40px; z-index:3; text-align:center; background-color:rgba(0,0,0,0.3); border-radius:23%">
+        <a asp-controller="home" asp-action="menu" style="font-size:15px; font-weight:bold; padding:3px; text-decoration:none; color:black">Menüye Dön</a>
+    </div>
+
+    <div class="onhoverchangeopacity" style="position:fixed; right:30px; bottom:30px; z-index:3">
+        <a href="#" style="text-decoration:none; color:black"> <i style="font-size:30px;" class="fa">&#xf062;</i> </a> 
+    </div>
+
+    <div style="margin-top:90px; margin-bottom:50px;">
+    </div>
+}
+
+

@@ -1,0 +1,113 @@
+﻿@model RestoranOtomasyonuWebApp.Models.SiparisModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+    <form asp-controller="Islemler" asp-action="Masa" asp-route-masaNo="@Model.masaNo" style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Masaya Dön" />
+            </div>
+        </div>
+    </form>
+
+    <hr />
+
+    <h2 style="text-align:center; color:darkred"> @Model.masaNo numaralı masaya siparis ekleme :</h2>
+    <hr />
+    <hr />
+    <h3 style="margin-bottom:10px;">Menü :</h3>
+
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+    UrunGurubuModel urunGuruplari = new UrunGurubuModel();
+    urunGuruplari.UrunGuruplariList = dataAccess.UrunGuruplari();
+
+
+
+    int c = 0;
+    <form id="siparisForm" asp-controller="Islemler" asp-action="SiparisEklePost" style="margin-top:30px;">
+        <div class="accordion" id="accordionExample">
+            <div class="card" style="position:fixed; bottom:20px; right:40%; z-index:4">
+                <div class="card-header" id="Htamamla">
+                    <h2 class="mb-0">
+                        <button class="btn btn-outline-info" type="button" data-toggle="collapse" data-target="#tamamla" aria-expanded="true" aria-controls="collapseOne">
+                            Tamamla
+                        </button>
+                    </h2>
+                </div>
+            </div>
+            @foreach (var urunGurubu in urunGuruplari.UrunGuruplariList)
+            {
+                List<UrunModel> guruptakiUrunler = new List<UrunModel>();
+                guruptakiUrunler = dataAccess.GetUrunByGurupId(urunGurubu.Id);
+                guruptakiUrunler = guruptakiUrunler.Where(x => x.stokVarYok == "var").ToList();
+                string collapseId = "colid" + c;
+                string headerId = "headid" + c;
+                <div class="card">
+                    <div class="card-header" id="@headerId">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#@collapseId" aria-expanded="true" aria-controls="collapseOne">
+                                @urunGurubu.gurupAdi
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="@collapseId" class="collapse" aria-labelledby="@headerId" data-parent="#accordionExample">
+                        <div class="card-body">
+                            @foreach (var urun in guruptakiUrunler)
+                            {
+                                <h4 style="color:darkgreen">@urun.urunAdi</h4>
+                                <p>@urun.urunAciklamasi</p>
+                                <p>Fiyat @urun.urunFiyati TL</p>
+                                <div class="form-group">
+                                    <div style="display:inline-block">
+                                        Adet/Porsiyon: <input id="@urun.Id" asp-for="adetList" class="form-control" type="number" style="max-width:100px; text-align:center; background-color:grey; font-weight:bolder" min="0" max="100" value="" required step=".5" autocomplete="off" oninvalid="document.getElementById('@urun.Id').value = 0; document.getElementById('siparisForm').submit();" />
+                                        <span style="margin-top:8px;">
+                                            Not : <input asp-for="siparisNotlari" type="text" placeholder="sipariş ile ilgili not" autocomplete="off" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div>
+                                        <input asp-for="urunNoList" class="form-control" value="@urun.Id" hidden required />
+                                    </div>
+                                </div>
+                                <hr/>
+                            }
+                        </div>
+                    </div>
+
+                    @{c += 1;}
+                </div>
+            }
+            <div id="tamamla" class="collapse" aria-labelledby="Htamamla" data-parent="#accordionExample">
+                <div class="card-body">
+                    <div class="form-group" style="text-align:center; margin-top:40px; z-index:5; margin-bottom:15px;">
+                        <div>
+                            <input asp-for="masaNo" class="form-control" value="@Model.masaNo" hidden required />
+                            <!-- 1  <input asp-for="siparisNotu" type="text" placeholder="sipariş ile ilgili not" style="margin-bottom:15px; margin-right:10px; min-width:250px; " autocomplete="off" />  -->
+                            <input type="submit" class="btn btn-success" value="Seçilen Adet/Porsiyon Ürün Sipariş Olarak Ekle" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+}
+
+<div style="margin-top:50px; margin-bottom:50px;" name="secilenurunler">
+
+</div>
+
+<div style="margin-bottom:150px;"></div>
+
+

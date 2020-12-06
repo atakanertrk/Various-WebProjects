@@ -1,0 +1,43 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+
+<form asp-controller="Admin" asp-action="Index">
+    <div class="form-group">
+        <input type="text" asp-for="password" value="@Model.password" class="form-control" readonly hidden autocomplete="off" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="panel ana sayfasına dön" class="btn btn-secondary" />
+    </div>
+</form>
+<hr />
+<h3>Eğitim Bilgilerini Düzenle (fotoğrafı değiştirmek için kayıt silinip tüm bilgiler tekrar girilmelidir)</h3>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="EgitimUpdatePost" method="post">
+            <div class="form-group">
+                <label>Eğitim Başlığı</label>
+                <input asp-for="egitimlerModel.Baslik" class="form-control" value="@Model.egitimlerModel.Baslik" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Yeni Tarih Girin (eski tarih: @Model.egitimlerModel.Tarih)</label>
+                <input asp-for="egitimlerModel.Tarih" class="form-control" value="@DateTime.UtcNow.AddHours(3)" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Eğitim ile ilgili bir link girin. Link koymak istemiyor iseniz nokta koyun</label>
+                <input asp-for="egitimlerModel.Link" class="form-control" type="text" value="@Model.egitimlerModel.Link" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label for="metintextarea">Eğitimi açıklayan metin girin</label>
+                <textarea class="form-control" asp-for="egitimlerModel.Metin" id="metintextarea" rows="5" required autocomplete="off">@Model.egitimlerModel.Metin</textarea>
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="password" class="form-control" readonly hidden autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="egitimlerModel.Id" value="@Model.egitimlerModel.Id" class="form-control" readonly hidden autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Eğitimi Yukarıdaki Bilgiler İle Güncelle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

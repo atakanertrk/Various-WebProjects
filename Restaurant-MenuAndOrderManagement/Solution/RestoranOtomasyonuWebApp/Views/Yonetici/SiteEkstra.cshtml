@@ -1,0 +1,51 @@
+﻿@model RestoranOtomasyonuWebApp.Models.SiteEkstraModel;
+@{ 
+    Layout = "_LayoutAdmin";
+}
+@{
+    dynamic dataAccess;
+    if (RestoranOtomasyonuWebApp.Controllers.Storage.isDevelopment)
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.SqlDataAccess();
+    }
+    else
+    {
+        dataAccess = new RestoranOtomasyonuWebApp.DataAccess.MySqlDataAccess();
+    }
+    var ekstra = dataAccess.GetSiteEkstra();
+
+    <form asp-controller="Yonetici" asp-action="Index"  style="margin-top:30px;">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+
+
+    <div style="margin-top:70px;">
+        <h3>Ana Sayfadaki Bilgileri Buradan Değiştirebilirsiniz (yeni değerleri girip değiştire tıklayın) :</h3>
+
+        <form asp-controller="Yonetici" asp-action="SiteEkstraGuncelle" style="margin-top:20px;">
+            <div class="form-group">
+                <div class="col-md-10">
+
+                    <p style="font-weight:bold">Genel Yazı: <span style="color:green">@ekstra.anaSayfaMesaji</span> </p>
+                    <input asp-for="anaSayfaMesaji" type="text" value="@ekstra.anaSayfaMesaji" style="width:80%; height:50px;" />
+                    <hr />
+
+                    <p style="font-weight:bold">Telefon Numarası: <span style="color:green">@ekstra.telefon</span> </p>
+                    <input asp-for="telefon" type="text" value="@ekstra.telefon" style="width:80%; height:50px;" />
+                    <hr />
+
+                    <p style="font-weight:bold">Adres Açıklaması: <span style="color:green">@ekstra.adresAciklama</span> </p>
+                    <input asp-for="adresAciklama" type="text" value="@ekstra.adresAciklama" style="width:80%; height:50px;" />
+                    <hr />
+
+                    <br />
+                    <input type="submit" class="btn btn-outline-info" value="Değiştir" />
+                </div>
+            </div>
+        </form>
+    </div>
+}

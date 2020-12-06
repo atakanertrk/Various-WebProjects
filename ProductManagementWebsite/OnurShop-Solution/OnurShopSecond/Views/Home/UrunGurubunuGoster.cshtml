@@ -1,0 +1,57 @@
+﻿@model OnurShopSecond.Models.ViewGroupModel;
+@{
+    ViewData["Title"] = "UrunGurubunuGoster";
+}
+
+@{
+
+    if (Model.urunListesi.Count == 0)
+    {
+        <h3>Bu Gurupta Henüz Herhangi Bir Ürün Bulunmuyor</h3>
+    }
+    else
+    {
+
+        <h3> <span style="color:darkred; font-size:larger">@Model.UrunGurubununAdi</span> Adlı Guruptaki Ürünler Aşağıda Listelenmiştir </h3>
+
+        <table class="table table-hover table-bordered table-responsive">
+            <thead>
+                <tr>
+                    <th>Ürün Numarası</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Miktarı</th>
+                    <th>Ürün Ücreti (TL) </th>
+                    <th>Ürün Özellikleri</th>
+                    <th>Ürün Gurubu</th>
+                    <th>Gurup Numarası</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.urunListesi)
+                {
+                <tr>
+                    <td>@item.ProductId</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Price</td>
+                    <td>@item.Properties</td>
+                    <td>@Model.UrunGurubununAdi</td>
+                    <td>@item.GroupId</td>
+                    <td>
+                        <img src="~/images/tek.png" alt="ürün" width="100" height="100" />
+                    </td>
+                    <td>
+                        <div class="btn btn-success">
+                            <a href="@Url.Action("UrunuGoster", "Home",new { selectedProductId = item.ProductId })" style="font-weight:bold; color:black">
+                                Ürünü Görüntüle
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+
+}

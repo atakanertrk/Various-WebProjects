@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZMO-Eskisehir-WebUI", "ZMO-Eskisehir-WebUI\ZMO-Eskisehir-WebUI.csproj", "{60767C50-5F61-4F71-849E-A98F2E759721}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60767C50-5F61-4F71-849E-A98F2E759721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60767C50-5F61-4F71-849E-A98F2E759721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60767C50-5F61-4F71-849E-A98F2E759721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60767C50-5F61-4F71-849E-A98F2E759721}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F02437A-A8AD-4651-9BFF-8CEDD9850288}
+	EndGlobalSection
+EndGlobal

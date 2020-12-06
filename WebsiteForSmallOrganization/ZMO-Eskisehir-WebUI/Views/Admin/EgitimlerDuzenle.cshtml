@@ -1,0 +1,95 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+
+<form asp-controller="Admin" asp-action="Index">
+    <div class="form-group">
+        <input type="text" asp-for="password" value="@Model.password" class="form-control" readonly hidden autocomplete="off" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="panel ana sayfasına dön" class="btn btn-secondary" />
+    </div>
+</form>
+
+<h3>Eğitim Ekleme</h3>
+<h4>Fotoğraf seçimi ekle denildikten sonra yapılır</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="EgitimEkle" method="post">
+            <div class="form-group">
+                <label>Eğitim Başlığı</label>
+                <input asp-for="egitimlerModel.Baslik" class="form-control" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label>Tarih</label>
+                <input asp-for="egitimlerModel.Tarih" class="form-control" value="@DateTime.UtcNow.AddHours(3)" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label for="metintextarea">Eğitim Hakkında Açıklama</label>
+                <textarea class="form-control" asp-for="egitimlerModel.Metin" id="metintextarea" rows="5" required autocomplete="off"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Eğitim ile ilgili bir link yazabilirsiniz. Link ekleme istemiyorsanız nokta koyun</label>
+                <input asp-for="egitimlerModel.Link" class="form-control" type="text" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="text" asp-for="password" class="form-control" readonly hidden autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Eğitim Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<hr />
+
+<h3>Bütün Eğitimler Aşağıda Listelenmiştir. Eğitimi Sil seçeneği ile ilgili Eğitimi silebilirsiniz</h3>
+<br />
+
+@{
+    <ul style="list-style:none">
+        @{
+            int counter = 1;
+            foreach (var egitim in Model.egitimlerModel.egitimler)
+            {
+                if (counter>=100)
+                {
+                    break;
+                }
+                <li style="margin-bottom:15px">
+                    <h3 class="text-break" style="color:darkred">@egitim.Baslik</h3>
+                    <p style="font-weight:bold">@egitim.Tarih.ToShortDateString()</p>
+                    @{ string imageName = egitim.Id.ToString() + ".jpg";}
+                    <img src="~/Resources/Images/Egitimlerimiz/@imageName" alt="eğitim fotografi bulunamadı" style="max-width:40%" />
+                    <p class="text-break">@egitim.Metin</p>
+                    <p><a href="@egitim.Link">@egitim.Link</a></p>
+                    <form asp-controller="Admin" asp-action="EgitimSil">
+                        <div class="form-group">
+                            <input asp-for="id" value="@egitim.Id" class="form-control" hidden readonly autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" asp-for="password" class="form-control" readonly hidden autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Eğitimi Sil" class="btn btn-danger" />
+                        </div>
+                    </form>
+                    <form asp-controller="Admin" asp-action="EgitimUpdate">
+                        <div class="form-group">
+                            <input asp-for="id" value="@egitim.Id" class="form-control" hidden readonly autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="password" value="@Model.password" class="form-control" hidden readonly autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Eğitim Bilgilerini Değiştir" class="btn btn-info" />
+                        </div>
+                    </form>
+                    <hr />
+                </li>
+                counter += 1;
+            }
+        }
+
+    </ul>
+}

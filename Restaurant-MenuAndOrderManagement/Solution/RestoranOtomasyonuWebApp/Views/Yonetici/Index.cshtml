@@ -1,0 +1,44 @@
+﻿@model RestoranOtomasyonuWebApp.Models.YoneticiGirisModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{ string baseUrl = RestoranOtomasyonuWebApp.Controllers.Storage.baseURL; }
+@{
+    <form asp-controller="Home" asp-action="Admin" style="margin-top:30px">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+    <form asp-controller="Yonetici" asp-action="YoneticiCikisYap" style="margin-top:30px">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-danger" value="Çıkış Yap" />
+            </div>
+        </div>
+    </form>
+    <h1>Yönetici Ana Sayfasındasınız</h1>
+    <p>İşlemler:</p>
+    <hr />
+
+    <ul style="margin-top:80px;">
+        <li>
+            @{ string menuDuzenleRedirect = $"{baseUrl}/yonetici/menuduzenle";}
+            <a href="@menuDuzenleRedirect">
+                <h5>Menüyü Düzenle</h5>
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Yonetici" asp-action="MasaIslemleri">
+                <h5>Masa Ekleme Silme</h5>
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Yonetici" asp-action="SiteEkstra">
+                <h5>Site Yazılarını Değiştir (ana sayfadaki mesaj, telefon no, adres gibi bilgileri değiştir)</h5>
+            </a>
+        </li>
+    </ul>
+
+}

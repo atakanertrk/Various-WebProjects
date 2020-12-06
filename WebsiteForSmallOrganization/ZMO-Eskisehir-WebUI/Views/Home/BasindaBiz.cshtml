@@ -1,0 +1,15 @@
+﻿@model ZMO_Eskisehir_WebUI.Models.GroupOfModels;
+@{
+    <button type="button" class="btn btn-success"><a asp-controller="Home" asp-action="Index" style="color:whitesmoke; font-weight:bold; text-decoration:none">Ana Sayfa</a></button>
+    <hr />
+
+    foreach (var basindaBiz in Model.BasindaBizModel.basindaBizKayitlar)
+    {
+        <h5 style="font-weight:bold">@basindaBiz.Tarih.ToShortDateString()</h5>
+        <h4 style="color:darkgreen; font-weight:bold" class="text-break">@basindaBiz.Baslik</h4>
+        string imageName = basindaBiz.Id.ToString() + ".jpg";
+        <img src="~/Resources/Images/BasindaBiz/@imageName" alt="basında biz fotoğrafı yok" style="max-width:50%">
+        <p><a href="@basindaBiz.Link" class="text-break">@basindaBiz.Link</a></p>
+
+    }
+}

@@ -1,0 +1,27 @@
+﻿@model RestoranOtomasyonuWebApp.Models.YoneticiGirisModel;
+@{
+    Layout = "_LayoutAdmin";
+}
+@{
+    <form asp-controller="Home" asp-action="Admin" style="margin-top:30px">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-outline-info" value="Önceki Sayfaya Dön" />
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Yonetici" asp-action="YoneticiGiris">
+                <div class="form-group">
+                    <label>Yönetici Şifresi:</label>
+                    <input asp-for="YoneticiSifresi" class="form-control" type="password" required autocomplete="on" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Giris" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
